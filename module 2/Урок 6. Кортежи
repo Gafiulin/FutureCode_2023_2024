@@ -1,0 +1,104 @@
+По кочкам
+numbers = []
+n = int(input())
+while n:
+    numbers.append(n)
+    n = int(input())
+result = tuple()
+for i in range(1, len(numbers) - 1):
+    if numbers[i - 1] < numbers[i] > numbers[i + 1]:
+        result += (i,)
+print(result)
+
+
+Отрезки
+n = int(input())
+intervals = []
+for _ in range(n):
+    intervals.append((int(input()), int(input())))
+point = int(input())
+result = tuple()
+for i in range(len(intervals)):
+    a, b = intervals[i]
+    if a <= point <= b:
+        result += (i,)
+print(result)
+
+
+Ближний круг
+n = int(input())
+radius = 10 ** 9
+for _ in range(n):
+    x, y = int(input()), int(input())
+    dist = (x ** 2 + y ** 2) ** 0.5
+    radius = min(radius, dist)
+print(radius)
+
+
+Решето
+result = tuple()
+word = input()
+vowels = "АЕЁИОУЫЭЮЯаеёиоуыэюя"
+while ' ' not in word:
+    temp = tuple()
+    for i in range(len(word)):
+        if word[i] in vowels:
+            temp += (i,)
+    if len(temp) > len(result) or len(temp) == len(result) and temp > result:
+        result = temp
+    word = input()
+print(result)
+
+
+Кто за кем
+name = input()
+names = []
+while name:
+    names.append(name)
+    name = input()
+for i in range(len(names) - 1):
+    for j in range(len(names) - 1 - i):
+        if names[j] > names[j + 1]:
+            names[j], names[j + 1] = names[j + 1], names[j]
+for i in range(0, len(names), 2):
+    if len(names) % 2 and i == len(names) - 1:
+        print(names[i])
+    else:
+        print(f'{names[i]}, {names[i + 1]}')
+
+
+Треугольник Матроскина
+from math import cos, radians
+from turtle import Turtle, done
+
+triangle = Turtle()
+side, angle, n = int(input()), int(input()), int(input())
+triangle.speed(0)
+base = side * cos(radians(angle))
+
+triangle.color('blue')
+triangle.pu()
+triangle.goto(base, -side / 2)
+points = [triangle.pos()]
+triangle.lt(180 - angle)
+for _ in range(n):
+    triangle.fd(side / n)
+    points.append(triangle.pos())
+triangle.lt(2 * angle)
+for _ in range(n):
+    triangle.fd(side / n)
+    points.append(triangle.pos())
+
+triangle.seth(0)
+for i in range(0, len(points) // 2 + 1, 2):
+    triangle.pu()
+    triangle.goto(points[i])
+    triangle.begin_fill()
+    triangle.goto(points[len(points) - i - 1])
+    triangle.goto(points[len(points) - i - 2])
+    triangle.goto(points[i + 1])
+    triangle.end_fill()
+    triangle.pd()
+
+triangle.hideturtle()
+done()

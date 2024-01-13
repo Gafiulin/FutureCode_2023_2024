@@ -1,0 +1,196 @@
+Внимание
+from turtle import *
+
+table = Turtle()
+text = input()
+size = int(input())
+r = r1 = int(input())
+g = g1 = int(input())
+b = b1 = int(input())
+w, h = 640, 300
+colormode(255)
+for _ in range(6):
+    table.color(r, g, b)
+    table.pu()
+    table.goto(-w // 2, -h // 2)
+    table.pd()
+    table.begin_fill()
+    for _ in range(2):
+        table.fd(w)
+        table.lt(90)
+        table.fd(h)
+        table.lt(90)
+    table.end_fill()
+    w -= 20
+    h -= 20
+    r += 15
+    g += 15
+    b += 15
+table.pu()
+table.goto(0, -size * 0.8)
+table.color(r1, g1, b1)
+table.write(text, font=('Droid Sans', size, 'normal'), align='center')
+table.ht()
+done()
+
+
+Указатель
+from turtle import *
+
+card = Turtle()
+card.speed(0)
+width, name, dist = int(input()), input(), input()
+card.color('#0000CD')
+card.pu()
+card.goto(-width // 2, -60)
+card.pd()
+for _ in range(2):
+    card.fd(width)
+    card.lt(90)
+    card.fd(120)
+    card.lt(90)
+card.pu()
+card.goto(-width // 2 + 10, -50)
+card.begin_fill()
+card.pd()
+for _ in range(2):
+    card.fd(width - 20)
+    card.lt(90)
+    card.fd(100)
+    card.lt(90)
+card.end_fill()
+card.pu()
+card.goto(-width // 2 + 20, -40)
+card.color('#fff')
+card.write(name, align='left', font=('Arial', 60, 'normal'))
+card.goto(width // 2 - 20, -40)
+card.write(dist, align='right', font=('Arial', 60, 'normal'))
+card.hideturtle()
+done()
+
+
+Детский сад
+from turtle import *
+
+card = Turtle()
+card.speed(0)
+side, table, contour, font_color, size = int(input()), input(), input(), input(), int(input())
+card.color(contour, table)
+card.pensize(15)
+name, code = input(), input()
+card.pu()
+card.goto(-side // 2, -side // 2)
+card.pd()
+card.begin_fill()
+for _ in range(4):
+    card.fd(side)
+    card.lt(90)
+card.end_fill()
+card.pu()
+card.goto(0, 0)
+card.color(font_color)
+card.write(name, align='center', font=('Trebuchet MS', size, 'bold'))
+card.goto(0, -side / 2)
+card.write(code, align='center', font=('Trebuchet MS', 2 * size, 'normal'))
+card.hideturtle()
+done()
+
+
+Пятнашки
+from turtle import *
+
+tag = Turtle()
+tag.speed(0)
+side, width = int(input()), int(input())
+color = input()
+font, size = input(), int(input())
+tag.color(color)
+tag.pensize(width)
+for i in range(5):
+    tag.pu()
+    tag.goto(-side // 2, side // 2 - i * side // 4)
+    tag.pd()
+    tag.fd(side)
+tag.rt(90)
+for i in range(5):
+    tag.pu()
+    tag.goto(-side // 2 + i * side // 4, side // 2)
+    tag.pd()
+    tag.fd(side)
+tag.lt(90)
+square = side // 4
+tag.pu()
+for i in range(4):
+    for j in range(4):
+        if i * 4 + j + 1 != 16:
+            tag.goto(-side // 2 + (j + 1) * side // 4 - side // 8,
+                     side // 2 - (i + 1) * side // 4 + side // 8 - 0.8 * size)
+            tag.write(i * 4 + j + 1, font=(font, size, 'normal'), align='center')
+tag.ht()
+done()
+
+
+Ускоренное вращение
+from turtle import *
+
+func = Turtle()
+func.speed(0)
+size, font_color = int(input()), input()
+radius, oval_color = int(input()), input()
+func.color(font_color)
+func.pu()
+func.goto(-300, 150)
+theta = "\N{GREEK SMALL LETTER THETA}"
+omega = '\N{greek small letter omega}'
+frac = '\u00BD'
+epsilon = '\N{greek small letter epsilon}'
+power = '\u00B2'
+formula = F'{theta}={omega}t+{frac}{epsilon}t{power}'
+func.write(formula, font=('Times New Roman', size, 'normal'), align='left')
+func.goto(200, -200)
+func.pd()
+func.color(oval_color)
+func.begin_fill()
+for _ in range(2):
+    func.circle(radius, 45)
+    func.circle(radius * 2, 90)
+    func.circle(radius, 45)
+func.end_fill()
+func.color(font_color)
+func.lt(90)
+func.bk(radius // 4)
+func.fd(radius * 4)
+func.ht()
+done()
+
+
+Таблица Менделеева
+from turtle import *
+
+card = Turtle()
+card.speed(0)
+color, latin, rus, n, mass = input(), input(), input(), input(), input()
+card.color(color)
+card.pu()
+card.goto(-150, -200)
+card.pd()
+card.begin_fill()
+for _ in range(2):
+    card.fd(300)
+    card.lt(90)
+    card.fd(400)
+    card.lt(90)
+card.end_fill()
+card.pu()
+card.home()
+card.color('#404040')
+card.goto(0, -30)
+card.write(latin, align='center', font=('Arial', 80, 'normal'))
+card.goto(0, -90)
+card.write(rus, align='center', font=('Calibri', 40, 'normal'))
+card.goto(-130, 140)
+card.write(n, align='left', font=('Consolas', 36, 'normal'))
+card.goto(130, -160)
+card.write(mass, align='right', font=('Courier New', 36, 'normal'))
+card.hideturtle()
+done()
