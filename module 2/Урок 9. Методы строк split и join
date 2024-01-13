@@ -1,0 +1,73 @@
+Блоха
+line = input().split()
+n, m, k = int(line[0]), int(line[1]), int(line[2])
+if m > n:
+    m += 1
+elif m < n:
+    m -= 1
+    k = -k
+for i in range(n, m, k):
+    print(i)
+
+
+Подковы
+line = input().split(', ')
+print(' Есть! '.join(line) + ' Готово!')
+
+
+Разные ножки
+line = input().split()
+line_to_join = input()
+numbers = []
+for number in line:
+    if int(number) % 3:
+        numbers.append(str(int(number) + 3 - int(number) % 3))
+    else:
+        numbers.append(number)
+print(line_to_join.join(numbers))
+
+
+Незаметные
+part1, part2, line = input().split(maxsplit=2)
+fleas = line.split(part1)
+result = []
+for item in fleas:
+    result.append(''.join(item.split(part2)))
+print(' * '.join(result))
+
+
+По буквам
+line = input().split()
+divisor = input()
+result = []
+for word in line:
+    result.append(divisor.join(list(word)))
+print(' '.join(result))
+
+
+Расстояния до вершин
+from turtle import *
+
+poly = Turtle()
+poly.speed(0)
+n, side, r, g, b = int(input()), int(input()), int(input()), int(input()), int(input())
+colormode(255)
+poly.pensize(4)
+r1, g1, b1 = 255 - r, 255 - g, 255 - b
+poly.color(r1, g1, b1)
+for i in range(n):
+    poly.color(r, g, b)
+    poly.fd(side)
+    poly.color(r1, g1, b1)
+    if n % 2 and i == n // 2:
+        poly.write(f'dist: {round(poly.distance(0, 0), 1)}',
+                   align='center', font=('Arial', 14, 'normal'))
+    elif i < n // 2:
+        poly.write(f'dist: {round(poly.distance(0, 0), 1)}',
+                   align='left', font=('Arial', 14, 'normal'))
+    else:
+        poly.write(f'dist: {round(poly.distance(0, 0), 1)}',
+                   align='right', font=('Arial', 14, 'normal'))
+    poly.lt(360 / n)
+poly.ht()
+done()
