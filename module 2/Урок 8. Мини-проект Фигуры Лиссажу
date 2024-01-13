@@ -1,0 +1,122 @@
+Сложение колебаний
+from math import gcd, radians, sin, cos
+
+r1, r2, a, b = int(input()), int(input()), int(input()), int(input())
+result = []
+for t in range(360 // gcd(a, b) + 1):
+    x = r1 * cos(a * radians(t))
+    y = r2 * sin(b * radians(t))
+    result.append((round(x, 2), round(y, 2)))
+print(result)
+
+
+Фигуры Лиссажу
+import turtle
+from math import radians, sin, pi, gcd
+
+lissajous = turtle.Turtle()
+lissajous.speed(0)
+lissajous.pensize(3)
+lissajous.color(input())
+n = 360
+r1, r2 = int(input()), int(input())
+a, b = int(input()), int(input())
+phi = pi / 2
+k = gcd(a, b)
+lissajous.pu()
+lissajous.goto(0, abs(r2))
+lissajous.write(f'a = {a}, b = {b}', align='center',
+                font=('Times New Roman', 24, 'normal'))
+for teta in range(n // k + 1):
+    # расчет координат
+    x = r1 * (sin(a * radians(teta) + phi))
+    y = r2 * (sin(b * radians(teta)))
+    # переход в точку
+    lissajous.goto(x, y)
+    # рисование
+    lissajous.pd()
+lissajous.ht()
+turtle.done()
+
+
+Исследование разности фаз-1
+import turtle
+from math import radians, sin, pi, gcd
+
+lissajous = turtle.Turtle()
+colors = ('plum', 'crimson', 'orange', 'seagreen', 'blue')
+lissajous.speed(0)
+lissajous.pensize(3)
+n = 360
+r1, r2 = int(input()), int(input())
+a, b = 5, 5
+
+k = gcd(a, b)
+for p in range(5):
+    phi = p * pi / 8
+    lissajous.pu()
+    lissajous.color(colors[p])
+    for teta in range(n // k + 1):
+        # расчет координат
+        x = r1 * (sin(a * radians(teta) + phi))
+        y = r2 * (sin(b * radians(teta)))
+        # переход в точку
+        lissajous.goto(x, y)
+        # рисование
+        lissajous.pd()
+lissajous.ht()
+turtle.done()
+
+
+Исследование разности фаз-2
+import turtle
+from math import radians, sin, pi, gcd
+
+lissajous = turtle.Turtle()
+colors = ('plum', 'orchid', 'crimson', 'orange', 'seagreen', 'teal', 'blue')
+lissajous.speed(0)
+lissajous.pensize(3)
+n = 360
+r1, r2 = int(input()), int(input())
+a, b = 1, 2
+
+k = gcd(a, b)
+for p in range(7):
+    phi = p * pi / 7
+    lissajous.pu()
+    lissajous.color(colors[p])
+    for teta in range(n // k + 1):
+        # расчет координат
+        x = r1 * (sin(a * radians(teta) + phi))
+        y = r2 * (sin(b * radians(teta)))
+        # переход в точку
+        lissajous.goto(x, y)
+        # рисование
+        lissajous.pd()
+lissajous.ht()
+turtle.done()
+
+
+Исследование отношений частот
+import turtle
+from math import cos, radians, sin, gcd
+
+lissajous = turtle.Turtle()
+colors = ('violet', 'crimson', 'orangered', 'orange', 'yellow')
+
+lissajous.speed(0)
+lissajous.pensize(3)
+n = 360
+r1, r2 = int(input()), int(input())
+for a in range(2, 11, 2):
+    lissajous.color(colors[a // 2 % len(colors) - 1])
+    b = 10
+    lissajous.pu()
+    for teta in range(n // gcd(a, b) + 1):
+        x = r1 * (cos(a * radians(teta)))
+        y = r2 * (sin(b * radians(teta)))
+        lissajous.goto(x, y)
+        lissajous.pd()
+
+lissajous.ht()
+turtle.done()
