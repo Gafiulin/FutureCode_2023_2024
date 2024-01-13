@@ -1,0 +1,48 @@
+Двузначная кратность
+n = int(input())
+print([x for x in range(10, 100) if x % n == 0])
+
+
+Всё длиннее
+line = input().split()
+print(' '.join([line[i] for i in range(1, len(line))
+                if len(line[i]) > len(line[i - 1])]))
+
+
+Кратность словами
+print('\n'.join([f'Число {x} кратно трём.' if x % 3 == 0 else f'Число {x} не кратно трём.'
+                 for x in range(int(input()), int(input()) + 1)]))
+
+
+Перестановка букв
+word = input()
+print('\n'.join([word[i:] + word[:i] for i in range(len(word) + 1)]))
+
+
+Примерчики
+n, m, k = [int(x) for x in input().split()]
+print('\n'.join([f'{i} + {j} = {i + j}' for i in range(n, m + 1) for j in range(m, k + 1)]))
+
+
+Звёзды в небе
+from turtle import *
+
+star = Turtle()
+star.speed(0)
+x = 2
+shape = ((-5 * x, 0), (-x, x), (0, 5 * x), (x, x), (5 * x, 0),
+         (x, -x), (0, -5 * x), (-x, -x), (-5 * x, 0))
+register_shape('star', shape)
+star.shape('star')
+color, size = input().split()
+star.color(color)
+star.turtlesize(int(size))
+
+star.pu()
+places = [int(x) for x in input().split()]
+for i in range(0, len(places), 2):
+    x, y = places[i:i + 2]
+    star.goto(x, y)
+    star.stamp()
+
+done()
