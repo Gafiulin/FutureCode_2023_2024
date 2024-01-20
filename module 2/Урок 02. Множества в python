@@ -1,0 +1,82 @@
+Черепашки-ниндзя: количество
+
+turtles = set()
+name = input()
+while name:
+    turtles.add(name)
+    name = input()
+print(len(turtles))
+
+
+Черепашки-ниндзя: повязки
+
+colors = set()
+for _ in range(int(input())):
+    line = input()
+    if line in colors:
+        print('БЫЛ')
+    else:
+        print('НЕ БЫЛО')
+        colors.add(line)
+
+
+Черепашки-ниндзя: имена
+
+name1, name2, name3 = input(), input(), input()
+result = (set(name1) & set(name2)).union(
+    set(name1) & set(name3)).union(set(name3) & set(name2))
+for letter in result:
+    print(letter, end='')
+
+
+Черепашки-ниндзя: новичок
+
+turtles = set()
+more_than_one = set()
+name = input()
+while name:
+    if name in turtles:
+        more_than_one.add(name)
+    turtles.add(name)
+    name = input()
+result = turtles - more_than_one
+for name in result:
+    print(name)
+
+
+Черепашки-ниндзя: отличия
+
+sensei = input()
+name = input()
+result = ''
+while name:
+    if len(set(name) - set(sensei)) > len(set(result) - set(sensei)):
+        result = name
+    name = input()
+for letter in set(result) - set(sensei):
+    print(letter, end='')
+
+
+Инь и ян
+
+from turtle import *
+
+yang = Turtle()
+r = int(input())
+c1, c2 = input(), input()
+yang.color(c1)
+yang.begin_fill()
+yang.circle(r, 180)
+yang.rt(180)
+yang.circle(-2 * r, 180)
+yang.circle(-r, 180)
+yang.end_fill()
+yang.color(c2)
+yang.begin_fill()
+yang.circle(r, 180)
+yang.circle(2 * r, 180)
+yang.rt(180)
+yang.circle(-r, 180)
+yang.end_fill()
+yang.hideturtle()
+done()
