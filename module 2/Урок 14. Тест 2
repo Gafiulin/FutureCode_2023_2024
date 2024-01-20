@@ -98,3 +98,61 @@ for i in range(len(l1) - 1):
                 l2[j], l2[j + 1] = l2[j + 1], l2[j]
 for i in range(len(l1)):
     print(l1[i].capitalize(), ' (', l2[i], ')', sep='')
+
+
+Шитов Михаил
+
+Зеркало в овраге
+
+n = int(input())
+a = set()
+for i in range(n):
+    s = input()
+    a.add(s.capitalize())
+ for i in a:
+    print(i)
+
+
+Будущее
+
+n = int(input())
+sep = input()
+s = input()
+a = s.split(sep)
+for i in range(len(a)):
+    if i % n == 0:
+        r = a[i]
+        a[i] = r[::-1]
+print('; '.join(a))
+
+
+Всё может быть
+
+l1 = []
+l2 = []
+l3 = []
+s = input()
+while s != 'DREAMS!':
+    a, b, c = s.split(' ! ')
+    l1.append(b)
+    l2.append(a)
+    l3.append(int(c))
+    s = input()
+
+for i in range(len(l1) - 1):
+    for j in range(len(l1) - 1 - i):
+        if l3[j] < l3[j + 1]:
+            l1[j], l1[j + 1] = l1[j + 1], l1[j]
+            l2[j], l2[j + 1] = l2[j + 1], l2[j]
+            l3[j], l3[j + 1] = l3[j + 1], l3[j]
+
+for i in range(len(l3) - 1):
+    for j in range(len(l3) - 1 - i):
+        if l3[j] == l3[j + 1]:
+            if l1[j] < l1[j + 1]:
+                l1[j], l1[j + 1] = l1[j + 1], l1[j]
+                l2[j], l2[j + 1] = l2[j + 1], l2[j]
+                l3[j], l3[j + 1] = l3[j + 1], l3[j]
+for i in range(len(l1)):
+    print(l1[i], ' (', l2[i], ')', sep='')
+
