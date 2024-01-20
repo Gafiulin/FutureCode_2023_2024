@@ -1,0 +1,100 @@
+#ЗАДАЧИ ПЕРСОНАЛЬНЫЕ
+Зыкин Игорь
+
+Лисёнок и Ночь Волшебства
+
+s = input()
+a = set()
+while s != 'MORNING':
+    a.add(s.upper())
+    s = input()
+for i in a:
+    print(i)
+
+
+Забытое старое
+
+s = input()
+n = int(input())
+s1 = input() + ' '
+a = s.split(', ')
+for i in range(len(a)):
+    if i % n == 0:
+        a[i] = a[i].upper()
+print(s1.join(a))
+
+
+Полезные вещи
+
+l1 = []
+l2 = []
+s = input()
+while s != 'NOTHING MORE':
+    a, b, c = s.split()
+    l1.append(c)
+    l2.append(int(b))
+    s = input()
+for i in range(len(l1) - 1):
+    for j in range(len(l1) - 1 - i):
+        if l2[j] > l2[j + 1]:
+            l1[j], l1[j + 1] = l1[j + 1], l1[j]
+            l2[j], l2[j + 1] = l2[j + 1], l2[j]
+for i in range(len(l1) - 1):
+    for j in range(len(l1) - 1 - i):
+        if l2[j] == l2[j + 1]:
+            if l1[j] > l1[j + 1]:
+                l1[j], l1[j + 1] = l1[j + 1], l1[j]
+                l2[j], l2[j + 1] = l2[j + 1], l2[j]
+for i in range(len(l1)):
+    print(l1[i].lower(), ' (', l2[i], ')', sep='')
+
+
+Зырянова Юля
+
+Песенка ржавых ворот
+
+s = input()
+a = set()
+while '!' not in s:
+    if 'creak' in s:
+        a.add(s)
+    s = input()
+for i in a:
+    print(i.capitalize())
+
+
+Продолжение песенки
+
+s = input()
+b = input() + ' '
+j = input()
+a = s.split(b)
+for i in range(len(a)):
+    if i % 3 == 0:
+        a[i] = j
+print(b.join(a))
+
+
+Руины
+
+l1 = []
+l2 = []
+s = input()
+while s != 'WRECKS':
+    a, b, c = s.split()
+    l1.append(a)
+    l2.append(int(c) - int(b))
+    s = input()
+for i in range(len(l1) - 1):
+    for j in range(len(l1) - 1 - i):
+        if l2[j] < l2[j + 1]:
+            l1[j], l1[j + 1] = l1[j + 1], l1[j]
+            l2[j], l2[j + 1] = l2[j + 1], l2[j]
+for i in range(len(l1) - 1):
+    for j in range(len(l1) - 1 - i):
+        if l2[j] == l2[j + 1]:
+            if l1[j][0] <= l1[j + 1][0]:
+                l1[j], l1[j + 1] = l1[j + 1], l1[j]
+                l2[j], l2[j + 1] = l2[j + 1], l2[j]
+for i in range(len(l1)):
+    print(l1[i].capitalize(), ' (', l2[i], ')', sep='')
