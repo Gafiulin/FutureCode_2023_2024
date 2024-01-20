@@ -1,0 +1,69 @@
+Разные соседи
+
+line = input()
+for item in 'QQ', 'PP', 'RR':
+    line = line.replace(item, f'{item[0]} {item[0]}')
+arr = line.split()
+print(max([len(x) for x in arr]))
+
+
+Исключение
+
+line = input()
+line = line.replace('E', '*').replace('Y', '*').split('*')
+print(max([len(x) for x in line]))
+
+
+Первая неправильная
+
+brackets = input()
+stack = []
+for i in range(len(brackets)):
+    if brackets[i] == '(':
+        stack.append(i)
+    elif brackets[i] == ')':
+        if not stack:
+            stack.append(i)
+            break
+        else:
+            stack.pop()
+if not stack:
+    print('YES')
+else:
+    print(stack[-1])
+
+
+Ближайший меньший слева
+
+line = [int(x) for x in input().split()]
+# список индексов
+left = list(range(len(line)))
+stack = []
+for i in range(len(line)):
+    # пока стек не пуст и значение на вершине стека больше текущего в списке
+    while stack and line[i] < line[stack[-1]]:
+        # удаляем с вершины стека
+        stack.pop()
+    # если в стеке что-то осталось, меняем в итоговом списке
+    if stack:
+        left[i] = stack[-1]
+    # добавляем индекс текущего элемента в стек
+    stack.append(i)
+print(left)
+
+
+Пары подряд
+
+line = input()
+line = line.replace('MO', '*').replace('NO', '*')
+s = ''
+while s in line:
+    s += '*'
+print(len(s) - 1)
+
+
+Не рядом
+
+line = input()
+arr = line.replace('ON', 'O N').replace('NO', 'N O').split()
+print(max([len(s) for s in arr]))
