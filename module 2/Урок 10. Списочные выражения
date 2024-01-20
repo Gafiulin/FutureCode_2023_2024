@@ -27,22 +27,20 @@ print('\n'.join([f'{i} + {j} = {i + j}' for i in range(n, m + 1) for j in range(
 Звёзды в небе
 from turtle import *
 
-star = Turtle()
-star.speed(0)
+t = Turtle()
+t.speed(0)
 x = 2
 shape = ((-5 * x, 0), (-x, x), (0, 5 * x), (x, x), (5 * x, 0),
          (x, -x), (0, -5 * x), (-x, -x), (-5 * x, 0))
 register_shape('star', shape)
-star.shape('star')
+t.shape('star')
 color, size = input().split()
-star.color(color)
-star.turtlesize(int(size))
-
-star.pu()
+t.color(color)
+t.turtlesize(int(size))
+t.pu()
 places = [int(x) for x in input().split()]
 for i in range(0, len(places), 2):
     x, y = places[i:i + 2]
-    star.goto(x, y)
-    star.stamp()
-
+    t.goto(x, y)
+    t.stamp()
 done()
