@@ -1,0 +1,256 @@
+Затмение
+
+import turtle
+
+sun = turtle.Turtle()
+turtle.tracer(0)
+sun.color('navy')
+sun.goto(-360, 300)
+sun.begin_fill()
+for _ in range(2):
+    sun.fd(720)
+    sun.rt(90)
+    sun.fd(600)
+    sun.rt(90)
+sun.end_fill()
+sun.color('yellow')
+sun.pu()
+sun.goto(0, -120)
+sun.seth(0)
+sun.pd()
+sun.begin_fill()
+sun.circle(120)
+sun.end_fill()
+sun.ht()
+tom = turtle.Turtle()
+tom.ht()
+tom.pu()
+tom.color('navy')
+tom.goto(240, -120)
+tom.pd()
+dist = 0.02
+while True:
+    tom.clear()
+    tom.begin_fill()
+    tom.circle(120)
+    tom.end_fill()
+    turtle.update()
+    tom.back(dist)
+    if tom.xcor() < -240:
+        break
+turtle.done()
+
+
+Мяч по параболе
+
+import turtle
+sun = turtle.Turtle()
+turtle.tracer(0)
+sun.color('navy')
+sun.goto(-360, 300)
+sun.begin_fill()
+for _ in range(2):
+    sun.fd(720)
+    sun.rt(90)
+    sun.fd(600)
+    sun.rt(90)
+sun.end_fill()
+sun.color('yellow')
+sun.pu()
+sun.goto(0, -120)
+sun.seth(0)
+sun.pd()
+sun.begin_fill()
+sun.circle(120)
+sun.end_fill()
+sun.ht()
+tom = turtle.Turtle()
+tom.ht()
+tom.pu()
+tom.color('navy')
+tom.goto(240, -120)
+tom.pd()
+dist = 0.02
+while True:
+    tom.clear()
+    tom.begin_fill()
+    tom.circle(120)
+    tom.end_fill()
+    turtle.update()
+    tom.back(dist)
+    if tom.xcor() < -240:
+        break
+turtle.done()
+
+
+По волнам
+
+Вариант 1 (на 10 баллов)
+import turtle
+from math import cos
+
+wave = turtle.Turtle()
+wave.color('darkblue')
+wave.ht()
+boat = turtle.Turtle()
+shape = turtle.Shape('compound')
+poly1 = ((-15, 0), (-20, 10), (20, 10), (15, 0))
+shape.addcomponent(poly1, 'brown', 'maroon')
+poly2 = ((-5, 10), (-5, 45), (15, 10))
+shape.addcomponent(poly2, 'lightgray', 'gray')
+turtle.register_shape('ship', shape)
+boat.shape('ship')
+turtle.tracer(0)
+boat.lt(90)
+boat.shapesize(5)
+angle = 0.01
+a = 10
+i = 0
+while True:
+    boat.clear()
+    boat.seth(boat.heading() + angle)
+    if boat.heading() < 70 or boat.heading() > 110:
+        angle *= -1
+    if i > 100000:
+        break
+    i += 1
+    turtle.update()
+turtle.done()
+
+        
+Вариант 2 (на 15 баллов)
+import turtle
+from math import cos
+
+wave = turtle.Turtle()
+wave.color('darkblue')
+wave.ht()
+boat = turtle.Turtle()
+shape = turtle.Shape('compound')
+poly1 = ((-15, 0), (-20, 10), (20, 10), (15, 0))
+shape.addcomponent(poly1, 'brown', 'maroon')
+poly2 = ((-5, 10), (-5, 45), (15, 10))
+shape.addcomponent(poly2, 'lightgray', 'gray')
+turtle.register_shape('ship', shape)
+boat.shape('ship')
+turtle.tracer(0)
+boat.lt(90)
+boat.shapesize(5)
+angle = 0.1
+a = 10
+i = 0
+while True:
+    wave.clear()
+    wave.pu()
+    wave.begin_fill()
+    for x in range(-350, 351):
+        y = a * cos(0.072 * x) + 15
+        wave.goto(x, y)
+        wave.pd()
+    wave.goto(350, -300)
+    wave.goto(-350, -300)
+    wave.goto(-350, a * cos(0.072 * (-350)) + 15)
+    wave.end_fill()
+    boat.clear()
+    boat.seth(boat.heading() + angle)
+    if boat.heading() < 70 or boat.heading() > 110:
+        angle *= -1
+    if i > 100000:
+        break
+    i += 1
+    turtle.update()
+turtle.done()
+
+Вариант 3 (на 25 баллов)
+import turtle
+from math import cos, pi
+
+wave = turtle.Turtle()
+wave.color('darkblue')
+wave.ht()
+boat = turtle.Turtle()
+shape = turtle.Shape('compound')
+poly1 = ((-15, 0), (-20, 10), (20, 10), (15, 0))
+shape.addcomponent(poly1, 'brown', 'maroon')
+poly2 = ((-5, 10), (-5, 45), (15, 10))
+shape.addcomponent(poly2, 'lightgray', 'gray')
+turtle.register_shape('ship', shape)
+boat.shape('ship')
+turtle.tracer(0)
+boat.lt(90)
+boat.shapesize(5)
+angle = 0.1
+a = 10
+phi = 0
+delta = pi / 120
+i = 0
+while True:
+    wave.clear()
+    wave.pu()
+    wave.begin_fill()
+    for x in range(-350, 351):
+        y = a * cos(0.072 * x + phi) + 15
+        wave.goto(x, y)
+        wave.pd()
+    wave.goto(350, -300)
+    wave.goto(-350, -300)
+    wave.goto(-350, a * cos(0.072 * (-350)) + 15)
+    wave.end_fill()
+    phi += delta
+    boat.clear()
+    boat.seth(boat.heading() + angle)
+    if boat.heading() < 70 or boat.heading() > 110:
+        angle *= -1
+    if i > 50000:
+        break
+    i += 1
+    turtle.update()
+turtle.done()
+
+
+Система Солнце-Земля-Луна
+
+import turtle
+from math import cos, sin
+
+turtle.tracer(0)
+sun = turtle.Turtle()
+sun.ht()
+sun.color('yellow')
+sun.fd(80)
+sun.lt(90)
+sun.begin_fill()
+sun.circle(80)
+sun.end_fill()
+earth = turtle.Turtle()
+earth.ht()
+earth.color('blue')
+earth.lt(90)
+earth.goto(270, 0)
+moon = turtle.Turtle()
+moon.ht()
+moon.color('burlywood')
+moon.goto(270, 0)
+angle = 0.08
+i = 0
+while True:
+    earth.clear()
+    earth.circle(270, angle)
+    a = earth.towards(0, 0)
+    x = earth.xcor()
+    y = earth.ycor()
+    earth.begin_fill()
+    earth.circle(20)
+    earth.end_fill()
+    moon.clear()
+    moon.goto(x - 60 * cos(a / 2), y - 60 * sin(a / 2))
+    for _ in range(25):
+        moon.seth(earth.heading())
+        moon.begin_fill()
+        moon.circle(10)
+        moon.end_fill()
+    if i > 50000:
+        break
+    i += 1
+    turtle.update()
+turtle.done()
