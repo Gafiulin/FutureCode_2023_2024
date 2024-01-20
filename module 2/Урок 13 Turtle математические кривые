@@ -1,0 +1,184 @@
+Полярная роза
+
+from math import cos, sin, radians
+from turtle import Turtle, done
+
+curve = Turtle()
+curve.speed(0)
+contour, fill = input().split()
+curve.color(contour, fill)
+curve.pensize(3)
+a, k = [float(x) for x in input().split()]
+curve.pu()
+curve.begin_fill()
+for t in range(721):
+    x = a * sin(radians(k * t)) * cos(radians(t))
+    y = a * sin(radians(k * t)) * sin(radians(t))
+    curve.goto(x, y)
+    curve.pd()
+curve.end_fill()
+curve.ht()
+done()
+
+
+Васильковое поле
+
+from math import cos, sin, radians
+from turtle import Turtle, done
+
+contour, fill = input().split()
+a = int(input())
+k = float(input())
+n = int(input())
+points = [[int(x) for x in input().split()] for _ in range(n)]
+corns = [Turtle() for _ in range(n)]
+for i in range(n):
+    corns[i].speed(0)
+    corns[i].color(contour, fill)
+    corns[i].pensize(3)
+    corns[i].pu()
+    corns[i].begin_fill()
+for t in range(721):
+    for i in range(n):
+        x = a * (1 - cos(radians(k * t)) + sin(radians(k * t)) ** 2) * cos(radians(t)) + points[i][0]
+        y = a * (1 - cos(radians(k * t)) + sin(radians(k * t)) ** 2) * sin(radians(t)) + points[i][1]
+        corns[i].goto(x, y)
+        corns[i].pd()
+for i in range(n):
+    corns[i].end_fill()
+    corns[i].ht()
+done()
+
+
+Покатили!
+
+from math import cos, sin, radians, pi
+from turtle import Turtle, done
+
+colors = input().split()
+a = int(input())
+cycl, wheel = Turtle(), Turtle()
+cycl.speed(0)
+wheel.speed(0)
+cycl.color(colors[0])
+wheel.color(colors[1])
+cycl.pu()
+wheel.pu()
+cycl.pensize(4)
+point = -3 * pi * a, 0
+cycl.goto(point)
+wheel.goto(point)
+for t in range(0, 1081, 20):
+    x = a * (radians(t) - sin(radians(t))) + point[0]
+    y = a * (1 - cos(radians(t))) + point[1]
+    cycl.goto(x, y)
+    wheel.goto(x, 0)
+    wheel.pd()
+    cycl.dot(6)
+    wheel.circle(a)
+cycl.ht()
+wheel.ht()
+done()
+
+
+Букет
+
+from math import cos, sin, radians
+from turtle import Turtle, done
+
+colors = input().split()
+contour = input()
+a = int(input())
+rose, stem = Turtle(), Turtle()
+rose.speed(0)
+stem.speed(0)
+rose.pu()
+stem.pu()
+rose.pensize(3)
+stem.pensize(4)
+stem.color('darkgreen')
+point = 0, -200
+k = 5
+i = 0
+for angle in (0, -30, -60):
+    stem.goto(point)
+    stem.seth(0)
+    stem.pd()
+    stem.lt(90 + angle)
+    stem.circle(500, 40)
+    center = stem.pos()
+    rose.goto(center)
+    rose.color(contour, colors[i])
+    rose.begin_fill()
+    for t in range(181):
+        x = a * sin(radians(k * t)) * cos(radians(t)) + center[0]
+        y = a * sin(radians(k * t)) * sin(radians(t)) + center[1]
+        rose.goto(x, y)
+        rose.pd()
+    rose.end_fill()
+    stem.pu()
+    rose.pu()
+    i += 1
+rose.ht()
+stem.ht()
+done()
+
+
+Два сердца
+
+from math import cos, sin, radians, pi
+from turtle import Turtle, done
+
+a1, a2 = [int(x) for x in input().split()]
+c1, c2 = input().split()
+heart1 = Turtle()
+heart1.speed(0)
+heart1.color(c1)
+heart2 = Turtle()
+heart2.speed(0)
+heart2.color(c2)
+m = 1
+heart1.pu()
+heart1.begin_fill()
+heart2.pu()
+heart2.begin_fill()
+for t in range(361):
+    x1 = a1 * (m + 1) * sin(radians(m * t)) - a1 * m * sin(radians(t + m * t))
+    y1 = a1 * (m + 1) * cos(radians(m * t)) - a1 * m * cos(radians(t + m * t)) + 50
+    heart1.goto(x1, y1)
+    x2 = a2 * (m + 1) * sin(radians(m * t) + pi / 4) - a2 * m * sin(radians(t + m * t) + pi / 4) + 150
+    y2 = a2 * (m + 1) * cos(radians(m * t) + pi / 4) - a2 * m * cos(radians(t + m * t) + pi / 4) - 80
+    heart2.goto(x2, y2)
+heart1.end_fill()
+heart1.ht()
+heart2.end_fill()
+heart2.ht()
+done()
+
+
+Вложенные сердца
+
+from math import cos, sin, radians
+from turtle import Turtle, done, colormode
+
+n, a, step, r, g, b = [int(x) for x in input().split()]
+hearts = [Turtle() for _ in range(n)]
+colormode(255)
+colors = [(r - i * step, g - i * step, b - i * step)
+          for i in range(n)]
+for i in range(n - 1, -1, -1):
+    hearts[i].speed(0)
+    hearts[i].color(colors[i])
+    hearts[i].pu()
+    hearts[i].begin_fill()
+hearts_a = [a + i * step for i in range(n)]
+for t in range(361):
+    for i in range(n):
+        x = hearts_a[i] * 2 * sin(radians(t)) - hearts_a[i] * sin(radians(2 * t))
+        y = hearts_a[i] * 2 * cos(radians(t)) - hearts_a[i] * cos(radians(2 * t))
+        hearts[i].goto(x, y)
+        hearts[i].pd()
+for i in range(n):
+    hearts[i].end_fill()
+    hearts[i].ht()
+done()
