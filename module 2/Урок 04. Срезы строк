@@ -1,0 +1,94 @@
+Черепашки-ниндзя: перспективы
+
+turtles = set('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+for _ in range(int(input())):
+    turtles -= set(input())
+if turtles:
+    for letter in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ':
+        if letter in turtles:
+            print(letter, end='')
+else:
+    print('УМЕЮТ ВСЁ')
+
+
+Прыжок кошки
+
+line = input()
+print(line[int(input()) - 1::int(input())])
+Отмерь и отрежь
+word = input()
+n = int(input())
+while word:
+    part = word[:n]
+    word = word[n:]
+    print(part, word)
+
+
+Шаг вперёд
+
+word = input()
+n = int(input())
+print(word[::-n])
+
+
+Акростих наоборот
+
+s = ''
+for _ in range(int(input())):
+    s += input()[-1]
+print(s[::-1])
+
+
+Цилиндр
+
+from turtle import *
+
+cylinder = Turtle()
+r, h = int(input()), int(input())
+pen, fill = input(), input()
+cylinder.pu()
+cylinder.goto(-100, -100)
+cylinder.pd()
+cylinder.color(pen, fill)
+cylinder.pensize(2)
+cylinder.begin_fill()
+for _ in range(2):
+    cylinder.fd(1.72 * r)
+    cylinder.lt(90)
+    cylinder.fd(h)
+    cylinder.lt(90)
+cylinder.end_fill()
+cylinder.rt(90)
+cylinder.begin_fill()
+cylinder.circle(r / 2, 45)
+cylinder.circle(r, 90)
+cylinder.circle(r / 2, 45)
+for _ in range(2):
+    cylinder.pu()
+    cylinder.circle(r / 2, 9)
+    cylinder.pd()
+    cylinder.circle(r / 2, 9)
+cylinder.pu()
+cylinder.circle(r / 2, 9)
+for _ in range(10):
+    cylinder.pd()
+    cylinder.circle(r, 4.5)
+    cylinder.pu()
+    cylinder.circle(r, 4.5)
+for _ in range(2):
+    cylinder.pd()
+    cylinder.circle(r / 2, 9)
+    cylinder.pu()
+    cylinder.circle(r / 2, 9)
+cylinder.end_fill()
+cylinder.seth(90)
+cylinder.fd(h)
+cylinder.pd()
+cylinder.begin_fill()
+cylinder.circle(-r / 2, 45)
+for _ in range(2):
+    cylinder.circle(-r, 90)
+    cylinder.circle(-r / 2, 90)
+cylinder.end_fill()
+cylinder.ht()
+done()
