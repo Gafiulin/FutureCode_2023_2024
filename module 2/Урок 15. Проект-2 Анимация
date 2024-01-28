@@ -43,44 +43,40 @@ turtle.done()
 
 Мяч по параболе
 
-import turtle
-sun = turtle.Turtle()
-turtle.tracer(0)
-sun.color('navy')
-sun.goto(-360, 300)
-sun.begin_fill()
-for _ in range(2):
-    sun.fd(720)
-    sun.rt(90)
-    sun.fd(600)
-    sun.rt(90)
-sun.end_fill()
-sun.color('yellow')
-sun.pu()
-sun.goto(0, -120)
-sun.seth(0)
-sun.pd()
-sun.begin_fill()
-sun.circle(120)
-sun.end_fill()
-sun.ht()
-tom = turtle.Turtle()
-tom.ht()
-tom.pu()
-tom.color('navy')
-tom.goto(240, -120)
-tom.pd()
-dist = 0.02
+from turtle import Turtle, tracer, done, update
+
+wall = Turtle()
+tracer(0)
+wall.color('maroon')
+wall.pensize(3)
+wall.pu()
+wall.goto(-350, 300)
+wall.pd()
+for x, y in (-350, -300), (350, -300), (350, 300):
+    wall.goto(x, y)
+wall.ht()
+
+ball = Turtle()
+ball.shape('circle')
+ball.color('blueviolet')
+ball.turtlesize(2)
+ball.goto(-340, 200)
+vel_x = 0.27
+vel_y = 0
+acc = -0.0005
+i = 0
 while True:
-    tom.clear()
-    tom.begin_fill()
-    tom.circle(120)
-    tom.end_fill()
-    turtle.update()
-    tom.back(dist)
-    if tom.xcor() < -240:
+    ball.clear()
+    ball.goto(ball.xcor() + vel_x, ball.ycor() + vel_y)
+    vel_y += acc
+    update()
+    if ball.ycor() < -290:
+        vel_y *= -1
+    if ball.xcor() > 340 or ball.xcor() < -340:
+        vel_x *= -1
+    if i > 100000:
         break
-turtle.done()
+done()
 
 
 По волнам
