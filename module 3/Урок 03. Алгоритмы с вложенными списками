@@ -87,3 +87,21 @@ for i in data:
     print()
 
 
+T-Rex
+
+d = []
+s = input().split()
+while s:
+    d.append(s)
+    s = input().split()
+t = [[0 for j in range(len(d[0]))] for i in range(len(d))]
+for i in range(0, len(d) - 2):
+    for j in range(1, len(d[0]) - 1):
+        t[i][j] = int(d[i][j - 1]) + int(d[i][j]) + int(d[i][j + 1]) + int(d[i + 1][j]) + int(d[i + 2][j])
+
+for i in t:
+    for j in i:
+        print(j, end='\t')
+    print()
+
+
