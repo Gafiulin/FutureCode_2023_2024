@@ -21,3 +21,19 @@ for i in range(n):
 
 В зеркале воды
 
+table = []
+s = input()
+while s != '':
+    raw = s.split()
+    for i in range(len(raw)):
+        raw[i] = int(raw[i])
+    table.append(raw)
+    s = input()
+for j in range(len(table[0])):
+    for i in range(len(table) // 2):
+        table[i][j], table[len(table) - 1 - i][j] = table[len(table) - 1 - i][j], table[i][j]
+for i in range(len(table)):
+    print(table[i])
+    
+
+
