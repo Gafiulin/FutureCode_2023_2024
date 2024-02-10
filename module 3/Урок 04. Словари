@@ -51,7 +51,14 @@ for _ in range(n):
 print(dic)
 
 
+Аминокислоты
 
+s = input()
+counts = {}
+for i in range(len(s) - 2):
+    a = s[i: i + 3]
+    counts[a] = counts.get(a, 0) + 1
+print(counts)
 
 
 
