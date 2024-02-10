@@ -1,0 +1,13 @@
+Герои сказок
+
+dic = {}
+s = input()
+while s:
+    book, hero = s.split(': ')
+    dic[hero] = book
+    s = input()
+n = int(input())
+for _ in range(n):
+    s = input()
+    print(dic.get(s, 'Нет информации.'))
+
