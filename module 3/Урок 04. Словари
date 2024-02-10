@@ -11,3 +11,16 @@ for _ in range(n):
     s = input()
     print(dic.get(s, 'Нет информации.'))
 
+
+Травяной чай
+
+s = input()
+counts = {}
+while s != "That's all":
+    counts[s] = counts.get(s, 0) + 1
+    s = input()
+print(counts)
+
+
+
+
