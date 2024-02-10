@@ -22,5 +22,14 @@ while s != "That's all":
 print(counts)
 
 
+Прогноз
+
+s = input()
+counts = {}
+for i in range(1, len(s)):
+    if s[i - 1] == 'A':
+        counts[s[i]] = counts.get(s[i], 0) + 1
+print(counts)
+
 
 
