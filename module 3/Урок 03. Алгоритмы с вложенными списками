@@ -1,0 +1,23 @@
+По росту равняйсь
+
+n, m = int(input()), int(input())
+table = []
+for i in range(n):
+    raw = []
+    for j in range(m):
+        raw.append(int(input()))
+    table.append(raw)
+for j in range(m):
+    temp = [table[i][j] for i in range(n)] 
+    temp.sort() 
+    for i in range(n):
+        table[i][j] = temp[i] 
+for i in range(n):
+    for j in range(m):
+        print(table[i][j], end='\t')
+    print()
+
+
+
+В зеркале воды
+
