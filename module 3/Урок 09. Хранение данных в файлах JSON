@@ -65,7 +65,7 @@ with open('factory.txt') as in_file, open('processes.json', 'w') as out_file:
 Спиральная галактика
 
 import json
-from turtle import Turtle, done
+from turtle import *
 
 ann = Turtle()
 bob = Turtle()
