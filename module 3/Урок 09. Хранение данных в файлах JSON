@@ -1,0 +1,92 @@
+Я тебя знаю?
+
+import json
+
+line = [int(x) for x in input().split()]
+dic = {}
+for n in line:
+    dic[n] = dic.get(n, 0) + 1
+with open('counting.json', 'w') as file:
+    json.dump(dic, file)
+
+
+Что-то важное
+
+import json
+
+with open('strings.json') as in_file:
+    lines = json.load(in_file)
+    average = sum([len(x) for x in lines]) / len(lines)
+    result = [x for x in lines if len(x) >= average]
+    result.sort()
+    print(', '.join(result))
+
+
+Навести порядок
+
+import json
+
+with open('numbers.json') as in_file, open('ready.json', 'w') as out_file:
+    lines = json.load(in_file)
+    result = list(set(lines))
+    result.sort(reverse=True)
+    json.dump(result, out_file)
+Ответ внутри
+import json
+
+with open('question.json') as in_file, open('response.json', 'w') as out_file:
+    lines = json.load(in_file)
+    result = sum(sum(row) for row in lines) - lines[len(lines) // 2][len(lines[0]) // 2]
+    lines[len(lines) // 2][len(lines[0]) // 2] = result
+    json.dump(lines, out_file)
+
+
+Зависимости
+
+import json
+
+with open('factory.txt') as in_file, open('processes.json', 'w') as out_file:
+    lines = [x.rstrip().split('\t') for x in in_file]
+    dic = {}
+    for item in lines:
+        if len(item) > 2:
+            ids, cost, depend = item
+            depend = depend.split(', ')
+        else:
+            ids, cost = item
+            depend = []
+        dic[ids] = {
+            "cost": int(cost),
+            "dependencies": depend
+        }
+    json.dump(dic, out_file)
+
+
+Спиральная галактика
+
+import json
+from turtle import Turtle, done
+
+ann = Turtle()
+bob = Turtle()
+bgcolor('black')
+shapes = turtles()
+with open('colors.json') as file:
+    colors = json.load(file)
+for i in range(2):
+    shapes[i].color(colors[i])
+    shapes[i].speed(0)
+    shapes[i].pensize(2)
+    shapes[i].ht()
+for step in range(3, 200):
+    if step % 2:
+        shapes[0].pd()
+        shapes[1].pu()
+    else:
+        shapes[1].pd()
+        shapes[0].pu()
+    for i in range(2):
+        shapes[i].fd(step)
+        shapes[i].lt(61)
+
+done()
