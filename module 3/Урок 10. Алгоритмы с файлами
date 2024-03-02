@@ -46,7 +46,7 @@ with open('sequence.txt') as in_file:
     max_s = s = max_count = count = 0
     for i in data:
         if i % 3 != 0:
-            sum += i
+            s += i
             count += 1
         else:
             if count > max_count or count == max_count and s > max_s:
