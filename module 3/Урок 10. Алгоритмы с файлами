@@ -26,3 +26,17 @@ with open('data.txt') as in_file, open('answer.txt', 'w') as out_file:
 
 
 
+Треугольник
+
+with open('triangles.txt') as in_file:
+    data = [x for x in in_file]
+    count = 0
+    for i in data:
+        a, b, c = i.split()
+        a, b, c = int(a), int(b), int(c)
+        if a < b + c and b < a + c and c < a + b:
+            count += 1
+    print(count)
+
+
+
