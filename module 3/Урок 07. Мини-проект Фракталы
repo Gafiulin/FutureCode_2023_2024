@@ -37,6 +37,64 @@ done()
 
 Перекладины
 
+from turtle import Turtle, done
+
+frac = Turtle()
+frac.speed(0)
+n = int(input())
+length_long = 300
+length_short = length_long / 1.618
+size = 10
+dot_size = 20
+frac.pensize(size)
+frac.color('limegreen')
+points = []
+points.append(frac.pos())
+
+for _ in range(n):
+    points1 = []
+    for i in points:
+        frac.pu()
+        frac.goto(i)
+        frac.pd()
+
+        frac.back(length_long / 2)
+        frac.lt(90)
+        frac.fd(length_short / 2)
+
+        # первая точка
+        frac.dot(dot_size)
+        points1 += [frac.pos()]
+
+        # вторая точка
+        frac.back(length_short)
+        frac.dot(dot_size)
+        points1 += [frac.pos()]
+
+        # перекладина
+        frac.fd(length_short / 2)
+        frac.rt(90)
+        frac.fd(length_long)
+        frac.lt(90)
+        frac.fd(length_short / 2)
+
+        # третья точка
+        frac.dot(dot_size)
+        points1 += [frac.pos()]
+        frac.back(length_short)
+
+        # четвертая точка
+        frac.dot(dot_size)
+        points1 += [frac.pos()]
+        frac.rt(90)
+    points = points1.copy()
+    length_long /= 2
+    length_short = length_long / 1.618
+    size -= 2
+    dot_size -= 2    
+
+frac.ht()
+done()
 
 
 Квадрат Серпинского 2 итерация
