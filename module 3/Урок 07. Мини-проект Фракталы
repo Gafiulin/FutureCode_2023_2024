@@ -41,13 +41,14 @@ from turtle import Turtle, done
 
 frac = Turtle()
 frac.speed(0)
+color = input()
 n = int(input())
 length_long = 300
 length_short = length_long / 1.618
 size = 10
 dot_size = 20
 frac.pensize(size)
-frac.color('limegreen')
+frac.color(color)
 points = []
 points.append(frac.pos())
 
