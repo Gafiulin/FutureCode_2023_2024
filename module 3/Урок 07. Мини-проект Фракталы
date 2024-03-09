@@ -41,22 +41,20 @@ from turtle import Turtle, done
 
 frac = Turtle()
 frac.speed(0)
-color = input()
-n = int(input())
 length_long = 300
-length_short = length_long / 1.618
 size = 10
 dot_size = 20
-frac.pensize(size)
-frac.color(color)
-points = []
-points.append(frac.pos())
-
-for _ in range(n):
+frac.color(input())
+n = int(input())
+points = [(0, 0)]
+for _ in range(n + 1):
+    length_short = length_long / 1.618
+    frac.pensize(size)
     points1 = []
-    for i in points:
+    for item in points:
+        frac.seth(0)
         frac.pu()
-        frac.goto(i)
+        frac.goto(item)
         frac.pd()
 
         frac.back(length_long / 2)
@@ -65,35 +63,28 @@ for _ in range(n):
 
         # первая точка
         frac.dot(dot_size)
-        points1 += [frac.pos()]
-
+        points1.append(frac.pos())
         # вторая точка
         frac.back(length_short)
         frac.dot(dot_size)
-        points1 += [frac.pos()]
-
+        points1.append(frac.pos())
         # перекладина
         frac.fd(length_short / 2)
         frac.rt(90)
         frac.fd(length_long)
         frac.lt(90)
         frac.fd(length_short / 2)
-
         # третья точка
         frac.dot(dot_size)
-        points1 += [frac.pos()]
+        points1.append(frac.pos())
         frac.back(length_short)
-
         # четвертая точка
         frac.dot(dot_size)
-        points1 += [frac.pos()]
-        frac.rt(90)
+        points1.append(frac.pos())
     points = points1.copy()
     length_long /= 2
-    length_short = length_long / 1.618
     size -= 2
-    dot_size -= 2    
-
+    dot_size -= 2
 frac.ht()
 done()
 
