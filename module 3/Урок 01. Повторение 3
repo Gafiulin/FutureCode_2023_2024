@@ -1,0 +1,125 @@
+Постепенный сдвиг
+
+line = input().split()
+res = []
+for i in range(len(line)):
+    if len(line[i]) > i:
+        res.append(line[i][i])
+    else:
+        res = ['МАЛОВАТО']
+        break
+print(''.join(res))
+
+
+Может-не может
+
+base, number = int(input()), input()
+res = 'ДА'
+for i in range(len(number) - 1, -1, -1):
+    if int(number[i]) >= base:
+        res = len(number) - 1 - i
+        break
+print(res)
+
+
+Прополка
+
+line = input()
+lines = []
+while line:
+    lines.append(line)
+    line = input()
+dust = input()
+for i in range(len(lines)):
+    temp = lines[i]
+    for letter in dust:
+        temp = temp.replace(letter, ' ')
+    lines[i] = ' '.join(temp.split())
+print('\n'.join(lines))
+
+
+Валенки
+
+numbers = input().split()
+result = []
+for n in numbers:
+    while len(n) > 1:
+        n = str(sum([int(x) for x in n]))
+    result.append(n)
+print('; '.join(result))
+
+
+Многоножки
+
+n = int(input())
+set_1 = set()
+set_2 = set()
+set_3 = set()
+for _ in range(n):
+    n = int(input())
+    if n > 40:
+        set_1.add(n)
+    if n % 2 == 0:
+        set_2.add(n)
+    if n % 3 == 0:
+        set_3.add(n)
+result = set_1.intersection(set_2).union(set_1.intersection(set_3)).union(
+    set_2.intersection(set_3)) - set_1.intersection(set_2).intersection(set_3)
+for item in result:
+    print(item, end=' ')
+
+
+Адресная табличка
+
+from turtle import Turtle, done
+
+plate = Turtle()
+plate.speed(0)
+plate.color(input())
+plate.fd(150)
+plate.begin_fill()
+plate.fd(150)
+plate.lt(90)
+plate.fd(150)
+plate.lt(90)
+plate.fd(600)
+plate.lt(90)
+plate.fd(150)
+plate.lt(90)
+plate.fd(150)
+plate.rt(90)
+plate.circle(150, 180)
+plate.end_fill()
+plate.fd(10)
+plate.rt(90)
+plate.bk(10)
+plate.color('white')
+plate.pensize(8)
+plate.fd(130)
+plate.lt(90)
+plate.circle(-20, 90)
+plate.lt(90)
+plate.fd(90)
+plate.lt(90)
+plate.circle(-20, 90)
+plate.lt(90)
+plate.fd(540)
+plate.lt(90)
+plate.circle(-20, 90)
+plate.lt(90)
+plate.fd(90)
+plate.lt(90)
+plate.circle(-20, 90)
+plate.lt(90)
+plate.fd(130)
+plate.rt(90)
+plate.fd(10)
+plate.circle(140, 180)
+plate.fd(10)
+plate.pu()
+plate.goto(0, 30)
+plate.write(input(), align='center', font=('Georgia', 60, 'normal'))
+plate.goto(0, -110)
+plate.write(input(), align='center', font=('Georgia', 100, 'normal'))
+plate.ht()
+done()
