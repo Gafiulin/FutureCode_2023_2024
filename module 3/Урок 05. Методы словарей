@@ -1,0 +1,106 @@
+Числа по диапазону
+
+numbers = [int(x) for x in input().split()]
+dic = dict.fromkeys(range(min(numbers), max(numbers) + 1), 0)
+for n in set(numbers):
+    dic[n] = numbers.count(n)
+print(dic)
+
+
+Буквенный состав
+
+words = ''.join(input().upper().split())
+dic = {letter: words.count(letter) for letter in set(words)
+       if letter.isalpha()}
+for letter, n in dic.items():
+    print(f'{letter} - {n}')
+
+
+Серебристые облака
+
+dic = {}
+n = int(input())
+for _ in range(n):
+    height, angle = [float(x) for x in input().split()]
+    dic[int(height)] = dic.get(int(height), []) + [angle]
+result = [(k, round(sum(v) / len(v), 1)) for k, v in dic.items()]
+result.sort()
+for h, v in result:
+    print(h, v)
+
+
+Закладки в книге
+
+dic = {}
+n = int(input())
+for _ in range(n):
+    n, tag = input().split(' - ')
+    dic[tag] = dic.get(tag, []) + [int(n)]
+    dic[tag].sort()
+result = sorted(dic)
+for tag in result:
+    print(f'{tag}: {", ".join([str(x) for x in dic[tag]])}')
+
+
+Словарный анализ
+
+dic = {}
+words = input().split()
+for word in words:
+    letters = list(set(word.lower()))
+    letters.sort()
+    temp = {
+        'length': len(word),
+        'has_upper': bool([x for x in word if x.isupper()]),
+        'has_digit': bool([x for x in word if x.isdigit()]),
+        'letters': ''.join(letters)
+    }
+    dic[word] = temp
+print(dic)
+
+
+Восход
+
+from turtle import Turtle, done
+
+r, g, b = [int(x) + 40 for x in input().split()]
+r1, g1, b1 = [int(x) + 40 for x in input().split()]
+bgcolor('#03a')
+sun = Turtle()
+sun.speed(0)
+colormode(255)
+sun.pu()
+sun.goto(-40, -310)
+sun.pd()
+radius = 330
+for _ in range(4):
+    sun.lt(90)
+    sun.color(r, g, b)
+    sun.begin_fill()
+    sun.circle(radius)
+    sun.end_fill()
+    r -= 10
+    g -= 10
+    b -= 10
+    radius -= 10
+    sun.rt(90)
+    sun.bk(10)
+sun.pu()
+sun.goto(370, -190)
+sun.pd()
+radius1 = 190
+for _ in range(4):
+    sun.color(r1, g1, b1)
+    sun.begin_fill()
+    sun.circle(radius1)
+    sun.end_fill()
+    r1 -= 10
+    g1 -= 10
+    b1 -= 10
+    radius1 -= 10
+    sun.rt(90)
+    sun.bk(10)
+    sun.lt(90)
+
+sun.ht()
+done()
