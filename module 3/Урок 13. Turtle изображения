@@ -1,0 +1,124 @@
+Идеальный фон
+
+from turtle import Screen, done
+
+from PIL import Image
+
+sc = Screen()
+im = Image.open('fon.png')
+x, y = im.size
+x0, y0 = (x - 768) // 2, (y - 648) // 2
+im_new = im.crop((x0, y0, x0 + 768, y0 + 648))
+im_new.save('f.png')
+sc.setup(startx=0, starty=0)
+sc.bgpic('f.png')
+done()
+
+
+Пряничный домик
+
+from turtle import Turtle, bgpic, addshape, done
+
+from PIL import Image
+
+w, h = [int(x) for x in input().split()]
+x, y = [int(x) for x in input().split()]
+bgpic('fon.png')
+t = Turtle()
+Image.open('house.gif').resize((w, h)).save('temp.gif')
+addshape('temp.gif')
+t.pu()
+t.goto(x, y)
+t.shape('temp.gif')
+t.stamp()
+done()
+
+
+Земляничная полянка
+
+from turtle import Turtle, addshape, done
+
+berry = Turtle()
+addshape('berry.gif')
+berry.shape('berry.gif')
+berry.pu()
+line = input()
+while line:
+    x, y = [int(a) for a in line.split()]
+    berry.goto(x, y)
+    berry.stamp()
+    line = input()
+done()
+
+
+Косогор
+
+from turtle import Turtle, bgpic, addshape, done
+
+fur = Turtle()
+bgpic('fon.png')
+addshape('fur.gif')
+fur.shape('fur.gif')
+fur.pu()
+fur.goto(-300, 150)
+fur.stamp()
+n = int(input()) - 1
+for _ in range(n):
+    fur.circle(-700, 15)
+    fur.stamp()
+
+done()
+
+
+Слоники
+
+from turtle import Turtle, bgpic, addshape, done
+
+from PIL import Image
+
+n = int(input())
+elephant = Turtle()
+bgpic('shelf.png')
+im = Image.open('elephant.gif')
+x, y = im.size
+shapes = ['elephant.gif']
+for i in range(n - 1):
+    x *= 0.8
+    y *= 0.8
+    temp_pic = im.resize((int(x), int(y)))
+    temp_pic.save(f'elephant{i}.gif')
+    shapes.append(f'elephant{i}.gif')
+elephant.pu()
+elephant.goto(-280, 150)
+step = 200
+for i in range(n):
+    addshape(shapes[i])
+    elephant.shape(shapes[i])
+    elephant.stamp()
+    elephant.fd(step)
+    step *= 0.8
+elephant.ht()
+done()
+
+
+Игровое поле
+
+from turtle import setup, done, bgpic
+
+from PIL import Image
+
+with open('map.txt') as file:
+    data = [x.rstrip() for x in file]
+    im = Image.new('RGB', (len(data[0]) * 100, len(data) * 100))
+    grass = Image.open('grass.png')
+    wall = Image.open('wall.png')
+    for i in range(len(data[0])):
+        for j in range(len(data)):
+            if data[j][i] == '0':
+                im.paste(grass, (i * 100, j * 100))
+            else:
+                im.paste(wall, (i * 100, j * 100))
+    im.save('field.png')
+setup(len(data[0]) * 100, len(data) * 100, 0, 0)
+bgpic('field.png')
+done()
