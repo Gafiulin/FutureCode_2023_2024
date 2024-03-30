@@ -1,0 +1,97 @@
+Снова пятнашки
+
+import random as rd
+
+temp = list(range(1, 16)) + ['']
+rd.shuffle(temp)
+tags = [temp[i:i + 4] for i in range(0, 16, 4)]
+# print(tags)
+for row in tags:
+    print(*row, sep='\t')
+
+
+Запоминание
+
+n, m = [int(x) for x in input().split()]
+result = []
+for i in range(n):
+    temp = [input() for _ in range(m)]
+    result.append(temp)
+x, y = [int(x) - 1 for x in input().split()]
+for i in range(n):
+    for j in range(m):
+        print(result[i][j], end='\t')
+    print()
+print(result[x][y])
+
+
+Рогатка
+
+n, m = int(input()), int(input())
+field = [[0] * n for _ in range(n)]
+for i in range(m):
+    x, y = [int(x) for x in input().split()]
+    field[y][x] = 1
+
+for i in range(n):
+    for j in range(n):
+        print(field[i][j], end=' ')
+    print()
+
+
+Итоги по столбцам
+
+n = int(input())
+result = []
+for i in range(n):
+    result.append([int(x) for x in input().split()])
+
+for i in range(len(result[0])):
+    total = sum([result[j][i] for j in range(n)])
+    print(total, end=' ')
+
+
+Две диагонали
+
+elements = [int(x) for x in input().split()]
+n = int(len(elements) ** 0.5)
+matrix = [elements[i:i + n] for i in range(0, len(elements), n)]
+main_diagonal = []
+side_diagonal = []
+for i in range(n):
+    for j in range(n):
+        if i == j:
+            main_diagonal.append(matrix[i][j])
+        if i == n - 1 - j:
+            side_diagonal.append(matrix[i][j])
+        print(matrix[i][j], end='\t')
+    print()
+side_diagonal = side_diagonal[::-1]
+result = [main_diagonal[i] * side_diagonal[i] for i in range(n)]
+print(result)
+
+
+Персик
+
+from math import sin, radians, cos
+from turtle import Screen, Turtle, done
+
+a = int(input())
+sc = Screen()
+sc.setup(7 * a, 7 * a, 0, 0)
+sc.title('Peach')
+peach = Turtle()
+peach.speed(0)
+peach.color('orange')
+peach.begin_fill()
+for t in range(361):
+    x = 2 * a * sin(radians(t)) - a * sin(radians(2 * t))
+    y = 2 * a * cos(radians(t)) - a * cos(radians(2 * t))
+    peach.goto(x, y)
+peach.end_fill()
+peach.lt(90)
+peach.color('brown')
+peach.pensize(7)
+peach.circle(3 * a, 30)
+peach.ht()
+done()
