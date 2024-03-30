@@ -1,0 +1,17 @@
+with open("places.txt") as in_file, open('suggest.txt', "w") as out_file:
+    a = []
+    b = []
+    s = 0
+    for line in in_file.readlines():
+        a.append(line.upper().rstrip())
+    for i in a:
+        s += len(i)
+    for i in a:
+        if len(i) <= s / len(a):
+            b.append(i)
+    b.sort(reverse=True)
+    print(b)
+    s = '\n'.join(b)
+    print(s, file=out_file)
+
+
