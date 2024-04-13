@@ -52,6 +52,16 @@ def multipliers(n):
 
 Пятая А
 
+def fifth_a(s):
+    a = s.lower().split()
+    counta = 0
+    for i in range(len(a)):
+        for j in range(len(a[i])):
+            if a[i][j] == 'а':
+                counta += 1
+                if counta == 5:
+                    return i + 1, j + 1
+    return -1, -1
 
 
 Право и лево
