@@ -1,0 +1,27 @@
+from turtle import Turtle, done, Screen, colormode
+import random as rd
+
+
+def draw(x, y):
+    nemo.color((rd.randint(0, 255), rd.randint(0, 255), rd.randint(0, 255)))
+    nemo.pu()
+    nemo.goto(x + side // 2, y - side // 2)
+    nemo.pd()
+    nemo.begin_fill()
+    for _ in range(4):
+        nemo.lt(90)
+        nemo.fd(side)
+    nemo.end_fill()
+
+
+nemo = Turtle()
+colormode(255)
+nemo.ht()
+side = 80
+nemo.speed(0)
+sc = Screen()
+sc.setup(starty=0, startx=0)
+sc.onclick(draw)
+sc.listen()
+
+done()
