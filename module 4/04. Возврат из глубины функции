@@ -33,3 +33,27 @@ def buzzing(s, c):
     return rez
 
 
+Множители
+
+def multipliers(n):
+    a = []
+    b = []
+    d = 2
+    while n > 1:
+        while n % d == 0:
+            a.append(d)
+            n //= d
+        d += 1
+    for i in a:
+        if (i, a.count(i)) not in b:
+           b.append((i, a.count(i))) 
+    return b
+
+
+Пятая А
+
+
+
+Право и лево
+
+
