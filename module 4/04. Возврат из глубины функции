@@ -1,0 +1,15 @@
+Формат времени
+
+
+def time_format(s):
+    if int(s[:2]) < 12:
+        return 'am', s
+    else:
+        if int(s[:2]) == 12:
+            return 'pm', s
+        elif int(s[:2]) - 12 < 10:
+            return 'pm', '0' + str(int(s[:2]) - 12) + s[2:]
+        else:
+            return 'pm', str(int(s[:2]) - 12) + s[2:]
+
+
