@@ -12,4 +12,24 @@ def time_format(s):
         else:
             return 'pm', str(int(s[:2]) - 12) + s[2:]
 
+Дуга
+
+from math import pi
+
+
+def arc(r, a):
+    return pi * r * a / 180, pi * r * r * a / 360
+
+
+
+Кто жужжит
+
+def buzzing(s, c):
+    a = s.split()
+    rez = []
+    for i in a:
+        if c.lower() in i.lower():
+            rez.append(i)
+    return rez
+
 
