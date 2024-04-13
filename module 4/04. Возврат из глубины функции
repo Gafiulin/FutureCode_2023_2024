@@ -66,4 +66,43 @@ def fifth_a(s):
 
 Право и лево
 
+from turtle import Turtle, Screen, done
 
+
+def left(x, y):
+    seva.goto(x, y)
+    seva.pd()
+    side, step = 3, 1
+    for _ in range(50):
+        seva.fd(side)
+        seva.lt(40)
+        side += step
+    seva.pu()
+
+
+def right(x, y):
+    seva.goto(x, y)
+    seva.pd()
+    side, step = 3, 1
+    for _ in range(50):
+        seva.fd(side)
+        seva.rt(40)
+        side += step
+    seva.pu()
+
+
+sc = Screen()
+sc.setup(starty=0, startx=0)
+
+seva = Turtle()
+seva.speed(0)
+seva.ht()
+seva.color('royalblue')
+seva.pensize(3)
+seva.pu()
+
+sc.onclick(left, 1)
+sc.onclick(right, 3)
+sc.listen()
+
+done()
