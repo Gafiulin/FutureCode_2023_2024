@@ -1,0 +1,108 @@
+Исключение D
+
+with open('lines.txt') as in_file, open('sequence.txt', 'w') as out_file:
+    max_seq = ''
+    for line in in_file:
+        line = line.rstrip()
+        if line.count('D') >= 5:
+            temp = line.split('D')
+            for item in temp:
+                if len(item) > len(max_seq) or \
+                        len(item) == len(max_seq) and item > max_seq:
+                    max_seq = item
+    print(max_seq, file=out_file)
+
+
+Наибольшая площадь
+
+with open('triangles.txt') as in_file:
+    lines = [[int(x) for x in line.split()] for line in in_file]
+    max_square = 0
+    largest = []
+    for item in lines:
+        a, b, c = item
+        if a + b > c and a + c > b and b + c > a:
+            p = sum(item) / 2
+            s = (p * (p - a) * (p - b) * (p - c))
+            if s > max_square:
+                largest = item[:]
+                max_square = s
+    print(*largest)
+
+
+Ровно один
+
+numbers = [int(x) for x in input().split()]
+dic = {x: numbers.count(x) for x in set(numbers)}
+for number in dic:
+    if dic[number] == 1:
+        print(number)
+        break
+
+
+Выше и дальше
+
+import json
+
+with open('points.json') as file:
+    points = json.load(file)
+    res = {"name": "", "z": 0, "dist": 0}
+    for point in points:
+        if point["z"] > res["z"] or \
+                point["z"] == res["z"] and point["x"] ** 2 + point["y"] ** 2 > res["dist"]:
+            res = {"name": point["name"], "z": point["z"], "dist": point["x"] ** 2 + point["y"] ** 2}
+    print(res["name"])
+
+
+Bubble gum
+
+from PIL import Image
+from PIL.ImageDraw import ImageDraw
+
+side, diameter = int(input()), int(input())
+r, g, b = [int(x) for x in input().split()]
+step = int(input())
+im = Image.new('RGB', (side, side), 'white')
+draw = ImageDraw(im)
+for i in range(side // diameter):
+    for j in range(side // diameter):
+        draw.ellipse((i * diameter, j * diameter, (i + 1) * diameter, (j + 1) * diameter),
+                     fill=(r + i * step, g, b + j * step))
+im.save('bubbles.png')
+
+
+Камень с глазами
+
+from PIL import Image
+
+im = Image.open('stone.png')
+x, y = im.size
+im_eyes = im.crop((115, 24, 188, 73))
+
+im_eye = im.crop((115, 24, 152, 73))
+
+gray = im.crop((39, 24, 114, 73))
+
+im_temp = im.copy()
+im_temp.paste(gray, (115, 24))
+
+im_new = Image.new('RGB', (x * 5, y))
+im_new.paste(im, (0, 0))
+
+im1 = im_temp.copy()
+im1.paste(im_eyes, (x // 2 - 37, 24))
+im_new.paste(im1, (x, 0))
+
+im2 = im_temp.copy()
+im2.paste(im_eyes, (x - 188, 24))
+im_new.paste(im2, (x * 2, 0))
+
+im3 = im_temp.copy()
+im3.paste(im_eye, (x - 188, 24))
+im_new.paste(im3, (x * 3, 0))
+
+im4 = im_temp.copy()
+im4.paste(im_eye, (152, 24))
+im_new.paste(im4, (x * 4, 0))
+
+im_new.save('stones.png')
