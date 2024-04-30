@@ -1,0 +1,39 @@
+Запрос по топониму
+
+url = "https://geocode-maps.yandex.ru/1.x/?"
+params = {
+    "geocode": input(),
+    "apikey": "40d1649f-0493-4b70-98ba-98533de7710b",
+    "format": "json"
+}
+print(f'{url}{"&".join("=".join((k, v)) for k, v in params.items())}')
+
+
+Разные страны
+
+response["response"]["GeoObjectCollection"]["featureMember"][0][
+    "GeoObject"]["metaDataProperty"]["GeocoderMetaData"]["Address"]["country_code"]
+
+
+Границы
+
+response["response"]["GeoObjectCollection"]["featureMember"][0][
+    "GeoObject"]["boundedBy"]["Envelope"]
+
+
+Где эта улица
+
+response["response"]["GeoObjectCollection"]["featureMember"][0][
+    "GeoObject"]["metaDataProperty"]["GeocoderMetaData"]["Address"]["Components"][-2]["name"]
+
+
+Название объекта
+
+response["response"]["GeoObjectCollection"]["featureMember"][0][
+    "GeoObject"]["name"]
+
+
+Что за тип?
+
+response["response"]["GeoObjectCollection"]["featureMember"][0][
+    "GeoObject"]["metaDataProperty"]["GeocoderMetaData"]["kind"]
