@@ -1,0 +1,80 @@
+Ближайшее кратное
+
+def nearest(n):
+    return n * 2 if n % 2 else n
+
+
+Буквы каждого слова
+
+def letters(lines):
+    res = []
+    for word in lines.split():
+        temp = list({letter.lower() for letter in word
+                     if letter.isalpha()})
+        temp.sort()
+        res.append(''.join(temp))
+    return res
+
+
+Разложение
+
+def factorization(n):
+    arr = []
+    divisor = 2
+    while n != 1:
+        while n % divisor == 0:
+            arr.append(divisor)
+            n //= divisor
+        divisor += 1
+    return arr
+
+
+Сдвиги
+
+def shifts(line, shift):
+    return line[shift % len(line):] + line[:shift % len(line)]
+
+
+Площадь треугольника
+
+def distance(m, n):
+    return ((m[0] - n[0]) ** 2 + (m[1] - n[1]) ** 2) ** 0.5
+
+
+def triangle_square(a, b, c: tuple) -> float:
+    side_a = distance(a, b)
+    side_b = distance(b, c)
+    side_c = distance(c, a)
+    p = (side_a + side_b + side_c) / 2
+    return (p * (p - side_a) * (p - side_b) * (p - side_c)) ** 0.5
+
+
+Случайные квадраты
+
+from turtle import Turtle, done, Screen
+import random as rd
+
+
+def draw(x, y):
+    nemo.color((rd.randint(0, 255), rd.randint(0, 255), rd.randint(0, 255)))
+    nemo.pu()
+    nemo.goto(x + side // 2, y - side // 2)
+    nemo.pd()
+    nemo.begin_fill()
+    for _ in range(4):
+        nemo.lt(90)
+        nemo.fd(side)
+    nemo.end_fill()
+
+
+nemo = Turtle()
+colormode(255)
+nemo.ht()
+side = 80
+nemo.speed(0)
+sc = Screen()
+sc.setup(starty=0, startx=0)
+sc.onclick(draw)
+sc.listen()
+
+done()
