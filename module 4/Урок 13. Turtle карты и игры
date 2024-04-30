@@ -1,0 +1,400 @@
+Задачи из урока
+
+
+Игра Острова с random
+
+import random
+from turtle import Screen, Turtle, done
+
+
+def func_letter(letter):
+    """
+    добавляет букву к строке ISLAND
+    очищает экран от текста
+    вызывает функцию печати строки ISLAND
+    :param letter:
+    :return:
+    """
+    global ISLAND
+    ISLAND += letter
+    tom.clear()
+    func_write()
+
+
+def func_write():
+    """
+    переводит Черепашку в точку печати
+    (низ окна)
+    печатает содержимое строки ISLAND
+    :return:
+    """
+    if ISLAND:
+        tom.goto(0, -240)
+        tom.write(ISLAND.upper(), align='center', font=(
+            'Roboto', 48, 'bold'
+        ))
+
+
+def check():
+    """
+    проверка правильности ввода
+    если верно, меняет цвет Черепашки на зеленый
+    а строку ISLAND на RIGHT!
+    иначе на красный и WRONG
+    вызывает функцию печати
+    :return:
+    """
+    tom.clear()
+    global ISLAND
+    if ISLAND == key.lower():
+        tom.color("yellowgreen")
+        ISLAND = "RIGHT!"
+    else:
+        tom.color("red")
+        ISLAND = "WRONG"
+    func_write()
+
+
+ISLAND = ''
+examples = ['madagascar.png', 'iceland.png', 'sakhalin.png']
+value = random.choice(examples)
+key = value.split('.')[0]
+sc = Screen()
+sc.setup(width=640, height=480)
+sc.bgpic(value)
+tom = Turtle()
+tom.ht()
+tom.pu()
+tom.color('yellow')
+sc.onkeypress(lambda: func_letter('a'), 'a')
+sc.onkeypress(lambda: func_letter('b'), 'b')
+sc.onkeypress(lambda: func_letter('c'), 'c')
+sc.onkeypress(lambda: func_letter('d'), 'd')
+sc.onkeypress(lambda: func_letter('e'), 'e')
+sc.onkeypress(lambda: func_letter('f'), 'f')
+sc.onkeypress(lambda: func_letter('g'), 'g')
+sc.onkeypress(lambda: func_letter('h'), 'h')
+sc.onkeypress(lambda: func_letter('i'), 'i')
+sc.onkeypress(lambda: func_letter('j'), 'j')
+sc.onkeypress(lambda: func_letter('k'), 'k')
+sc.onkeypress(lambda: func_letter('l'), 'l')
+sc.onkeypress(lambda: func_letter('m'), 'm')
+sc.onkeypress(lambda: func_letter('n'), 'n')
+sc.onkeypress(lambda: func_letter('o'), 'o')
+sc.onkeypress(lambda: func_letter('p'), 'p')
+sc.onkeypress(lambda: func_letter('q'), 'q')
+sc.onkeypress(lambda: func_letter('r'), 'r')
+sc.onkeypress(lambda: func_letter('s'), 's')
+sc.onkeypress(lambda: func_letter('t'), 't')
+sc.onkeypress(lambda: func_letter('u'), 'u')
+sc.onkeypress(lambda: func_letter('v'), 'v')
+sc.onkeypress(lambda: func_letter('w'), 'w')
+sc.onkeypress(lambda: func_letter('x'), 'x')
+sc.onkeypress(lambda: func_letter('y'), 'y')
+sc.onkeypress(lambda: func_letter('z'), 'z')
+sc.onkey(check, 'Up')
+sc.listen()
+done()
+
+
+Игра Страны и флаги с random
+
+import random
+from turtle import Screen, Turtle, done, addshape
+
+
+def check(x, y):
+    global win
+    if win:
+        return
+    if 160 <= x <= 360 and flag_point - 70 <= y <= flag_point + 70:
+        tom.color('green')
+        tom.goto(160, flag_point + 70)
+        win = True
+    elif 160 <= x <= 360 and -250 <= y <= -110:
+        tom.color('red')
+        tom.goto(160, -180 + 70)
+    elif 160 <= x <= 360 and -70 <= y <= 70:
+        tom.color('red')
+        tom.goto(160, 0 + 70)
+    elif 160 <= x <= 360 and 110 <= y <= 250:
+        tom.color('red')
+        tom.goto(160, 180 + 70)
+    tom.seth(0)
+    tom.pd()
+    for _ in range(2):
+        tom.fd(200)
+        tom.rt(90)
+        tom.fd(140)
+        tom.rt(90)
+    tom.pu()
+
+
+states = ['argentina', 'spain', 'india']
+state = random.choice(states)
+random.shuffle(states)
+win = False
+sc = Screen()
+sc.setup(startx=0, starty=0)
+tom = Turtle()
+tom.speed(0)
+tom.ht()
+tom.pu()
+tom.pensize(5)
+for item in states:
+    addshape(f"{item}.gif")
+    addshape(f"flag_{item}.gif")
+tom.goto(-110, 0)
+tom.shape(f"{state}.gif")
+tom.stamp()
+flags_y = [180, 0, -180]
+for i in range(3):
+    tom.goto(260, flags_y[i])
+    tom.shape(f"flag_{states[i]}.gif")
+    tom.stamp()
+    if states[i] == state:
+        flag_point = flags_y[i]
+sc.onclick(check, 1)
+done()
+
+
+
+Учебные задачи
+
+Масштаб по стрелкам
+
+from io import BytesIO
+from turtle import done, Screen
+import requests
+from PIL import Image
+
+
+def inc_scale():
+    global z
+    if z < 21:
+        z += 1
+    draw_map()
+
+
+def dec_scale():
+    global z
+    if z > 1:
+        z -= 1
+    draw_map()
+
+
+def draw_map():
+    url = f'https://static-maps.yandex.ru/v1?ll={lonlat}&z={z}&apikey=f3a0fe3a-b07e-4840-a1da-06f18b2ddf13'
+    response = requests.get(url)
+    im = Image.open(BytesIO(response.content))
+    im.save(f"football{z}.png")
+    sc.bgpic(f"football{z}.png")
+    sc.onkey(inc_scale, "Right")
+    sc.onkey(dec_scale, "Left")
+
+
+lonlat = "14.204317,68.149046"
+z = 15
+sc = Screen()
+sc.setup(width=640, height=480)
+sc.listen()
+draw_map()
+done()
+
+
+Охват карты по буквам
+
+from io import BytesIO
+from turtle import done, Screen
+import requests
+from PIL import Image
+
+
+def mode_q():
+    global spn
+    spn = 1
+    draw_map()
+
+
+def mode_w():
+    global spn
+    spn = 0.5
+    draw_map()
+
+
+def mode_e():
+    global spn
+    spn = 0.25
+    draw_map()
+
+
+def mode_r():
+    global spn
+    spn = 0.125
+    draw_map()
+
+
+def mode_t():
+    global spn
+    spn = 0.0625
+    draw_map()
+
+
+def mode_y():
+    global spn
+    spn = 0.03125
+    draw_map()
+
+
+def draw_map():
+    url = f'https://static-maps.yandex.ru/v1?ll={lonlat}&spn={spn},{spn}&apikey=f3a0fe3a-b07e-4840-a1da-06f18b2ddf13'
+    response = requests.get(url)
+    im = Image.open(BytesIO(response.content))
+    im.save(f"football{spn}.png")
+    sc.bgpic(f"football{spn}.png")
+    sc.onkey(mode_q, "q")
+    sc.onkey(mode_w, "w")
+    sc.onkey(mode_e, "e")
+    sc.onkey(mode_r, "r")
+    sc.onkey(mode_t, "t")
+    sc.onkey(mode_y, "y")
+
+
+lonlat = "-59.046565,-34.460901"
+spn = 1
+sc = Screen()
+sc.setup(width=640, height=480)
+sc.listen()
+draw_map()
+done()
+
+
+Ввод топонима
+
+from io import BytesIO
+from turtle import Screen, done
+
+import requests
+from PIL import Image
+
+sc = Screen()
+sc.setup(width=640, height=480)
+geo = sc.textinput("Toponym", "Введите название местности")
+geo_params = {
+    "apikey": "40d1649f-0493-4b70-98ba-98533de7710b",
+    "geocode": geo,
+    "format": "json"
+}
+url = "https://geocode-maps.yandex.ru/1.x/?"
+response = requests.get(url, params=geo_params).json()
+coordinates = response["response"]["GeoObjectCollection"][
+    "featureMember"][0]["GeoObject"]["Point"]["pos"]
+lonlat = ','.join(coordinates.split())
+static_params = {
+    "apikey": "f3a0fe3a-b07e-4840-a1da-06f18b2ddf13",
+    "ll": lonlat,
+    "z": 10
+}
+static_url = "https://static-maps.yandex.ru/v1?"
+static_response = requests.get(static_url, params=static_params)
+im = Image.open(BytesIO(static_response.content))
+im.save('geo.png')
+sc.bgpic('geo.png')
+done()
+
+
+Ввод масштаба
+
+from io import BytesIO
+from turtle import Screen, done
+
+import requests
+from PIL import Image
+
+sc = Screen()
+sc.setup(width=640, height=480)
+geo = sc.textinput("Toponym", "Введите название местности")
+scale = sc.numinput("Scale", "Введите масштабный фактор от 1 до 21",
+                    default=10, minval=1, maxval=21)
+
+geo_params = {
+    "apikey": "40d1649f-0493-4b70-98ba-98533de7710b",
+    "geocode": geo,
+    "format": "json"
+}
+url = "https://geocode-maps.yandex.ru/1.x/?"
+response = requests.get(url, params=geo_params).json()
+coordinates = response["response"]["GeoObjectCollection"][
+    "featureMember"][0]["GeoObject"]["Point"]["pos"]
+lonlat = ','.join(coordinates.split())
+static_params = {
+    "ll": lonlat,
+    "z": int(scale),
+    "apikey": "f3a0fe3a-b07e-4840-a1da-06f18b2ddf13"
+}
+static_url = "https://static-maps.yandex.ru/v1?"
+static_response = requests.get(static_url, params=static_params)
+im = Image.open(BytesIO(static_response.content))
+im.save('geo.png')
+sc.bgpic('geo.png')
+done()
+
+
+Управление картой
+
+from io import BytesIO
+from turtle import Screen, done
+
+import requests
+from PIL import Image
+
+
+def inc_scale():
+    global z
+    if z < 21:
+        z += 1
+    draw_map()
+
+
+def dec_scale():
+    global z
+    if z > 1:
+        z -= 1
+    draw_map()
+
+
+def draw_map():
+    geo_params = {
+        "apikey": "40d1649f-0493-4b70-98ba-98533de7710b",
+        "geocode": geo,
+        "format": "json"
+    }
+    url = "https://geocode-maps.yandex.ru/1.x/?"
+    response = requests.get(url, params=geo_params).json()
+    coordinates = response["response"]["GeoObjectCollection"][
+        "featureMember"][0]["GeoObject"]["Point"]["pos"]
+    lonlat = ','.join(coordinates.split())
+    static_params = {
+        "ll": lonlat,
+        "z": int(z),
+        "apikey": "f3a0fe3a-b07e-4840-a1da-06f18b2ddf13"
+    }
+    static_url = "https://static-maps.yandex.ru/v1?"
+    static_response = requests.get(static_url, params=static_params)
+    im = Image.open(BytesIO(static_response.content))
+    im.save(f'map{int(z)}.png')
+    sc.bgpic(f'map{int(z)}.png')
+
+    sc.onkey(inc_scale, "Right")
+    sc.onkey(dec_scale, "Left")
+
+
+sc = Screen()
+sc.setup(width=640, height=480)
+spn = 1
+geo = sc.textinput("Toponym", "Введите название местности")
+z = sc.numinput("Scale", "Введите масштабный фактор от 1 до 21",
+                default=10, minval=1, maxval=21)
+sc.listen()
+draw_map()
+done()
