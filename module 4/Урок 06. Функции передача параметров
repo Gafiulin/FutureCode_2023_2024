@@ -1,0 +1,114 @@
+Любимая еда По
+
+meals = []
+line = input()
+while line:
+    meal, caloric, rating = line.split()
+    meals.append((int(caloric), int(rating), meal))
+    line = input()
+for c, r, m in sorted(meals):
+    print(f'{m}\t{c}\t{r}')
+
+
+Обратные слова
+
+def reversed_word(item):
+    return item[::-1]
+
+
+words = []
+line = input()
+while line:
+    words.append(line)
+    line = input()
+for word in sorted(words, key=reversed_word):
+    print(word)
+
+
+Жизнь мюона
+
+velocities = [0.9991, 0.993, 0.995, 0.9915]
+tau = 2.2e-6
+c = 3e8
+
+
+def muon(dist):
+    res = []
+    for v in velocities:
+        t = tau / ((1 - v ** 2) ** 0.5)
+        if t >= dist * 1e3 / (v * c):
+            res.append(v)
+    return res
+
+
+Комета Галлея
+
+dic = {}
+
+
+def see_a_comet(name):
+    dic[name] = dic.get(name, 0) + 1
+    return dic[name]
+
+
+Оумуамуа
+
+measures = []
+
+
+def aliens(a, b, c):
+    greatest = max(measures) if measures else 1
+    if max(a, b, c) / min(a, b, c) > 10 * greatest:
+        res = 'Strangely'
+    else:
+        res = 'Typically'
+    measures.append(max(a, b, c) / min(a, b, c))
+    return res
+
+
+Включить свет
+
+from turtle import Turtle, done
+
+
+def day():
+    window.clear()
+    window.pu()
+    window.goto(-165, -75)
+    window.pd()
+    bgcolor('cornflowerblue')
+    window.color('white')
+    window.begin_fill()
+    for _ in range(4):
+        window.fd(100)
+        window.rt(90)
+    window.end_fill()
+
+
+def night():
+    window.clear()
+    window.pu()
+    window.goto(-165, -75)
+    window.pd()
+    bgcolor('navy')
+    window.color('yellow')
+    window.begin_fill()
+    for _ in range(4):
+        window.fd(100)
+        window.rt(90)
+    window.end_fill()
+
+
+bgpic('house.png')
+window = Turtle()
+window.speed(0)
+window.ht()
+day()
+
+for i in range(5):
+    if i % 2:
+        ontimer(day, 1000 * (i + 1))
+    else:
+        ontimer(night, 1000 * (i + 1))
+
+done()
