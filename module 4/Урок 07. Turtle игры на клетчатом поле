@@ -1,0 +1,500 @@
+Шарики
+
+from turtle import Turtle, Screen, done
+
+N, SIZE = 5, 100
+HALF_WINDOW = N * SIZE // 2
+COLORS = ['purple', 'violet']
+
+
+def grid():
+    row, column = Turtle(), Turtle()
+    for item in row, column:
+        item.speed(0)
+        item.ht()
+        item.pu()
+        item.goto(-(N * SIZE // 2), N * SIZE // 2)
+    column.rt(90)
+    for _ in range(N):
+        row.goto(-(N * SIZE // 2), row.ycor() - SIZE)
+        column.goto(column.xcor() + SIZE, N * SIZE // 2)
+        for item in row, column:
+            item.pd()
+            item.fd(N * SIZE)
+            item.pu()
+
+
+def point(x, y):
+    # приведение к середине клетки
+    w = ((x + HALF_WINDOW) // SIZE - (N - 1) / 2) * SIZE
+    h = ((y + HALF_WINDOW) // SIZE - (N - 1) / 2) * SIZE
+    tom.goto(w, h)
+    if (w, h) in board and board[(w, h)]:
+        board[(w, h)] = 0
+    else:
+        board[(w, h)] = 1
+    tom.dot(int(0.8 * SIZE), COLORS[board[(w, h)]])
+
+
+sc = Screen()
+sc.setup(N * SIZE, N * SIZE)
+grid()
+tom = Turtle()
+tom.speed(0)
+tom.pu()
+tom.ht()
+sc.onclick(point)
+sc.listen()
+
+board = {}
+done()
+
+
+Разноцветные шарики
+
+from turtle import Turtle, Screen, done
+
+N, SIZE = 7, 80
+HALF_WINDOW = N * SIZE // 2
+COLORS = ['gold', 'orange', 'orangered', 'crimson']
+
+
+def grid():
+    row, column = Turtle(), Turtle()
+    for item in row, column:
+        item.speed(0)
+        item.ht()
+        item.pu()
+        item.goto(-(N * SIZE // 2), N * SIZE // 2)
+    column.rt(90)
+    for _ in range(N):
+        row.goto(-(N * SIZE // 2), row.ycor() - SIZE)
+        column.goto(column.xcor() + SIZE, N * SIZE // 2)
+        for item in row, column:
+            item.pd()
+            item.fd(N * SIZE)
+            item.pu()
+
+
+def point(x, y):
+    # приведение к середине клетки
+    w = ((x + HALF_WINDOW) // SIZE - (N - 1) / 2) * SIZE
+    h = ((y + HALF_WINDOW) // SIZE - (N - 1) / 2) * SIZE
+    tom.goto(w, h)
+    if (w, h) in board:
+        board[(w, h)] = (board[(w, h)] + 1) % 4
+    else:
+        board[(w, h)] = 0
+    tom.dot(int(0.8 * SIZE), COLORS[board[(w, h)]])
+
+
+sc = Screen()
+sc.setup(N * SIZE, N * SIZE)
+grid()
+tom = Turtle()
+tom.speed(0)
+tom.pu()
+tom.ht()
+sc.onclick(point)
+sc.listen()
+
+board = {}
+done()
+
+
+Крестики-нолики
+
+from turtle import Turtle, Screen, done
+
+N, SIZE = 3, 150
+STEP = 1
+HALF_WINDOW = N * SIZE // 2
+
+
+def grid():
+    row, column = Turtle(), Turtle()
+    for item in row, column:
+        item.speed(0)
+        item.ht()
+        item.pu()
+        item.goto(-(N * SIZE // 2), N * SIZE // 2)
+    column.rt(90)
+    for _ in range(N):
+        row.goto(-(N * SIZE // 2), row.ycor() - SIZE)
+        column.goto(column.xcor() + SIZE, N * SIZE // 2)
+        for item in row, column:
+            item.pd()
+            item.fd(N * SIZE)
+            item.pu()
+
+
+def change_circle(obj):
+    obj.color('red', 'white')
+    obj.shape('circle')
+    obj.shapesize(6, outline=6)
+
+
+def change_cross(obj):
+    obj.color('blue', 'white')
+    obj.shape('cross')
+    obj.shapesize(6, outline=6)
+
+
+def point(x, y):
+    global STEP
+    # пересчет экранных координат в координаты вложенного списка
+    col = int((x + HALF_WINDOW) // SIZE)
+    row = int((y + HALF_WINDOW) // SIZE)
+    # в зависимости от того, чей ход
+    # записываем значение в board (1 или -1)
+    board[row][col] = STEP
+    # пересчет координат клетки в списке в координаты окна
+    w = col * SIZE + SIZE // 2 - HALF_WINDOW
+    h = row * SIZE + SIZE // 2 - HALF_WINDOW
+    tom.goto(w, h)
+    # вызываем функцию смены формы Черепашки
+    if STEP == 1:
+        change_cross(tom)
+    else:
+        change_circle(tom)
+    # делаем штамп
+    tom.stamp()
+    # меняем ход
+    STEP = -STEP
+    # проверяем выигрыш
+    check_result()
+    # print(*board, sep='\n')
+
+
+def check_result():
+    res = None
+    # проверим, есть ли выигрыш крестиков
+    if sum(board[0]) == 3 or sum(board[1]) == 3 or sum(board[2]) == 3 or \
+            sum([board[i][0] for i in range(3)]) == 3 or \
+            sum([board[i][1] for i in range(3)]) == 3 or \
+            sum([board[i][2] for i in range(3)]) == 3 or \
+            sum([board[i][i] for i in range(3)]) == 3 or \
+            sum([board[3 - i - 1][i] for i in range(3)]) == 3:
+        res = 'X'
+    elif sum(board[0]) == -3 or sum(board[1]) == -3 or sum(board[2]) == -3 or \
+            sum([board[i][0] for i in range(3)]) == -3 or \
+            sum([board[i][1] for i in range(3)]) == -3 or \
+            sum([board[i][2] for i in range(3)]) == -3 or \
+            sum([board[i][i] for i in range(3)]) == -3 or \
+            sum([board[3 - i - 1][i] for i in range(3)]) == -3:
+        res = '0'
+    elif 0 not in board[0] and 0 not in board[1] and 0 not in board[2]:
+        res = '-'
+    if res == '-':
+        tom.clear()
+        tom.goto(0, 0)
+        tom.write("It's a Draw", align='center', font=('Comfortaa', 48, 'normal'))
+    elif res is not None and res in 'X0':
+        tom.clear()
+        tom.goto(0, 0)
+        tom.write(f"{res} Win!", align='center', font=('Comfortaa', 48, 'normal'))
+
+
+sc = Screen()
+sc.setup(N * SIZE, N * SIZE, startx=0, starty=0)
+
+board = [[0] * 3 for _ in range(3)]
+
+shape = ((0, 0), (-10, 10), (10, -10),
+         (0, 0), (-10, -10), (10, 10))
+register_shape('cross', shape)
+tom = Turtle()
+tom.ht()
+tom.pu()
+tom.speed(0)
+
+grid()
+sc.onclick(point)
+sc.listen()
+done()
+
+
+Крестики-нолики с новой игрой
+
+from turtle import Turtle, Screen, done
+
+N, SIZE = 3, 150
+STEP = 1
+HALF_WINDOW = N * SIZE // 2
+
+
+def grid():
+    row, column = Turtle(), Turtle()
+    for item in row, column:
+        item.speed(0)
+        item.ht()
+        item.pu()
+        item.goto(-(N * SIZE // 2), N * SIZE // 2)
+    column.rt(90)
+    for _ in range(N):
+        row.goto(-(N * SIZE // 2), row.ycor() - SIZE)
+        column.goto(column.xcor() + SIZE, N * SIZE // 2)
+        for item in row, column:
+            item.pd()
+            item.fd(N * SIZE)
+            item.pu()
+
+
+def change_circle(obj):
+    obj.color('red', 'white')
+    obj.shape('circle')
+    obj.shapesize(6, outline=6)
+
+
+def change_cross(obj):
+    obj.color('blue', 'white')
+    obj.shape('cross')
+    obj.shapesize(6, outline=6)
+
+
+def point(x, y):
+    global STEP
+    # пересчет экранных координат в координаты вложенного списка
+    col = int((x + HALF_WINDOW) // SIZE)
+    row = int((y + HALF_WINDOW) // SIZE)
+    # в зависимости от того, чей ход
+    # записываем значение в board (1 или -1)
+    board[row][col] = STEP
+    # пересчет координат клетки в списке в координаты окна
+    w = col * SIZE + SIZE // 2 - HALF_WINDOW
+    h = row * SIZE + SIZE // 2 - HALF_WINDOW
+    tom.goto(w, h)
+    # вызываем функцию смены формы Черепашки
+    if STEP == 1:
+        change_cross(tom)
+    else:
+        change_circle(tom)
+    # делаем штамп
+    tom.stamp()
+    # меняем ход
+    STEP = -STEP
+    # проверяем выигрыш
+    check_result()
+    # print(*board, sep='\n')
+
+
+def check_result():
+    res = None
+    # проверим, есть ли выигрыш крестиков
+    if sum(board[0]) == 3 or sum(board[1]) == 3 or sum(board[2]) == 3 or \
+            sum([board[i][0] for i in range(3)]) == 3 or \
+            sum([board[i][1] for i in range(3)]) == 3 or \
+            sum([board[i][2] for i in range(3)]) == 3 or \
+            sum([board[i][i] for i in range(3)]) == 3 or \
+            sum([board[3 - i - 1][i] for i in range(3)]) == 3:
+        res = 'X'
+    elif sum(board[0]) == -3 or sum(board[1]) == -3 or sum(board[2]) == -3 or \
+            sum([board[i][0] for i in range(3)]) == -3 or \
+            sum([board[i][1] for i in range(3)]) == -3 or \
+            sum([board[i][2] for i in range(3)]) == -3 or \
+            sum([board[i][i] for i in range(3)]) == -3 or \
+            sum([board[3 - i - 1][i] for i in range(3)]) == -3:
+        res = '0'
+    elif 0 not in board[0] and 0 not in board[1] and 0 not in board[2]:
+        res = '-'
+    if res == '-':
+        tom.clear()
+        tom.goto(0, 0)
+        tom.write("It's a Draw", align='center', font=('Comfortaa', 48, 'normal'))
+    elif res is not None and res in 'X0':
+        tom.clear()
+        tom.goto(0, 0)
+        tom.write(f"{res} Win!", align='center', font=('Comfortaa', 48, 'normal'))
+
+
+def start():
+    tom.clear()
+    tom.goto(0, 0)
+    board[:] = [[0] * 3 for _ in range(3)]
+
+
+sc = Screen()
+sc.setup(N * SIZE, N * SIZE, startx=0, starty=0)
+
+board = [[0] * 3 for _ in range(3)]
+
+shape = ((0, 0), (-10, 10), (10, -10),
+         (0, 0), (-10, -10), (10, 10))
+register_shape('cross', shape)
+tom = Turtle()
+tom.ht()
+tom.pu()
+tom.speed(0)
+
+grid()
+sc.onclick(point)
+sc.onkey(start, 'space')
+sc.listen()
+done()
+
+
+Все для реверси
+
+from turtle import Turtle, Screen, done
+
+N, SIZE = 8, 70
+HALF_WINDOW = N * SIZE // 2
+COLORS = ['aquamarine', 'green']
+STEP = 1
+
+
+def grid():
+    row, column = Turtle(), Turtle()
+    for item in row, column:
+        item.speed(0)
+        item.ht()
+        item.pu()
+        item.goto(-(N * SIZE // 2), N * SIZE // 2)
+    column.rt(90)
+    for _ in range(N):
+        row.goto(-(N * SIZE // 2), row.ycor() - SIZE)
+        column.goto(column.xcor() + SIZE, N * SIZE // 2)
+        for item in row, column:
+            item.pd()
+            item.fd(N * SIZE)
+            item.pu()
+    draw()
+
+
+def point(x, y):
+    global STEP
+    # пересчет экранных координат в координаты вложенного списка
+    j = int((x + HALF_WINDOW) // SIZE)
+    i = int((y + HALF_WINDOW) // SIZE)
+    if not board[j][i]:
+        board[j][i] = STEP
+        # приведение к середине клетки
+        w = ((x + HALF_WINDOW) // SIZE - (N - 1) / 2) * SIZE
+        h = ((y + HALF_WINDOW) // SIZE - (N - 1) / 2) * SIZE
+        tom.goto(w, h)
+        color = board[j][i] if board[j][i] > 0 else 0
+        tom.dot(int(0.8 * SIZE), COLORS[color])
+        STEP = -STEP
+
+
+def draw():
+    for i in range(8):
+        for j in range(8):
+            if board[j][i]:
+                # пересчет координат клетки в координаты окна
+                x = j * SIZE + SIZE // 2 - HALF_WINDOW
+                y = i * SIZE + SIZE // 2 - HALF_WINDOW
+                tom.goto(x, y)
+                color = board[j][i] if board[j][i] > 0 else 0
+                tom.dot(int(0.8 * SIZE), COLORS[color])
+
+
+sc = Screen()
+sc.setup(N * SIZE, N * SIZE)
+
+tom = Turtle()
+tom.speed(0)
+tom.pu()
+tom.ht()
+sc.onclick(point)
+sc.listen()
+
+board = [[0] * 8 for _ in range(8)]
+board[4][3] = board[3][4] = 1
+board[3][3] = board[4][4] = -1
+grid()
+done()
+
+
+Найди слово
+
+from turtle import Turtle, Screen, done
+
+NX, NY, SIZE = 5, 6, 100
+DELTA = 100
+WORD = []
+board = []
+RIDDLE, DESCRIPTION = open('input.txt', encoding='utf8').read().rstrip().split(maxsplit=1)
+LETTERS = ['ДУМБЗ', 'КЩЮВЙ', 'ЕЖАПЫ', 'ХФШОС', 'ЭГЧИН', 'ЦТРЛЯ']
+
+
+def grid():
+    rows, column = Turtle(), Turtle()
+    for item in rows, column:
+        item.speed(0)
+        item.ht()
+        item.pu()
+        item.goto(-(NX * SIZE // 2), NY * SIZE // 2 - DELTA // 2)
+    column.rt(90)
+    for _ in range(NY):
+        rows.pd()
+        rows.fd(NX * SIZE)
+        rows.pu()
+        rows.goto(-(NX * SIZE // 2), rows.ycor() - SIZE)
+    for _ in range(NX):
+        column.goto(column.xcor() + SIZE, NY * SIZE // 2 - DELTA // 2)
+        column.pd()
+        column.fd(NY * SIZE)
+        column.pu()
+
+
+def letters_arrange():
+    let = Turtle()
+    let.speed(0)
+    let.color('gray')
+    let.ht()
+    let.pu()
+    params = {'align': 'center',
+              'font': ('Comfortaa', 68, 'normal')}
+    for i in range(NY):
+        let.goto(-((NX - 1) * SIZE // 2), (NY - 1 - i * 2) * SIZE // 2 - DELTA)
+        col = LETTERS[i]
+        board.append(col)
+        for j in range(NX):
+            let.write(col[j], **params)
+            let.fd(SIZE)
+
+
+def point(x, y):
+    tom.clear()
+    if y < NY / 2 * SIZE - DELTA / 2:
+        i = int((x + NX / 2 * SIZE) / SIZE)
+        j = int((-y + NY / 2 * SIZE - DELTA / 2) / SIZE)
+        WORD.append(board[j][i])
+        tom.goto(0, NY // 2 * SIZE - DELTA // 2)
+        params = {'align': 'center',
+                  'font': ('Comfortaa', 56, 'normal')}
+        tom.write(''.join(WORD), **params)
+        check()
+
+
+def start():
+    letters_arrange()
+    tom.goto(0, NY // 2 * SIZE - DELTA // 2)
+    params = {'align': 'center',
+              'font': ('Comfortaa', 26, 'normal')}
+    tom.write(DESCRIPTION, **params)
+
+
+def check():
+    if ''.join(WORD) == RIDDLE.upper():
+        tom.goto(0, NY // 2 * SIZE + 20)
+        tom.color('green')
+        params = {'align': 'center',
+                  'font': ('Comfortaa', 22, 'normal')}
+        text = 'Правильно!'
+        tom.write(text, **params)
+
+
+sc = Screen()
+sc.setup(NX * SIZE, NY * SIZE + DELTA, startx=0, starty=0)
+# print(sc.window_width(), sc.window_height())
+grid()
+tom = Turtle()
+tom.speed(0)
+tom.color('indigo')
+tom.ht()
+tom.pu()
+start()
+sc.onclick(point)
+done()
