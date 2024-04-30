@@ -1,0 +1,86 @@
+Скрытый ключ
+
+first, second, third, *rest = input().split()
+result = [x for x in [first, second] + rest
+          if not set(third) & set(x)]
+print(*result, sep=', ')
+
+
+Прореживание
+
+*rest, mult, step = [int(x) for x in input().split()]
+result = [x for x in rest[::step] if x % mult == 0]
+print(*result)
+
+
+Кто в лес
+
+def woods(line, first, step=1):
+    return line[first - 1::step]
+
+
+Ниже прямой
+
+K, B = -1.5, 6
+
+
+def below(*args):
+    result = []
+    for arg in args:
+        x, y = arg
+        if y < x * K + B:
+            result.append(arg)
+    return sorted(result)
+
+
+Микропоры
+
+def micropores(*args, **kwargs):
+    result = []
+    for arg in args:
+        if 'size' in kwargs and arg <= kwargs['size'] or \
+                'size' not in kwargs:
+            if 'mult' in kwargs and arg % kwargs['mult'] == 0 or \
+                    'mult' not in kwargs:
+                if 'bottom' in kwargs and arg >= kwargs['bottom'] or \
+                        'bottom' not in kwargs:
+                    result.append(arg)
+    return result
+
+
+Лопаем пузыри
+
+from turtle import Turtle, Screen, done, addshape
+
+
+def burst(x, y):
+    for item in bubbles:
+        x0, y0, i = item
+        if x0 - 100 <= x <= x0 + 100 and y0 - 100 <= y <= y0 + 100:
+            tom.shape('destroyed.gif')
+            tom.goto(x0, y0)
+            tom.clearstamp(i)
+            tom.stamp()
+            return
+
+
+sc = Screen()
+sc.setup(startx=0, starty=0)
+
+tom = Turtle()
+addshape('bubble.gif')
+addshape('destroyed.gif')
+tom.pu()
+tom.ht()
+tom.shape('bubble.gif')
+bubbles = []
+with open('input.txt') as file:
+    for item in file.readlines():
+        x, y = map(int, item.rstrip().split())
+        tom.goto(x, y)
+        i = tom.stamp()
+        bubbles.append((x, y, i))
+
+sc.onclick(burst)
+sc.listen()
+done()
