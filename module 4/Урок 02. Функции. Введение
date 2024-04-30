@@ -1,0 +1,69 @@
+Перевод
+
+def translate():
+    n = input()
+    res = 'Неверный ввод'
+    for symbol in n:
+        if symbol not in '01':
+            break
+    else:
+        res = int(n, 2)
+    print(res)
+
+
+Проверка високосности
+
+def leap(n):
+    if n % 400 == 0 or n % 4 == 0 and n % 100:
+        print(True)
+    else:
+        print(False)
+
+
+Подстановки
+
+def address(name, place, state, index):
+    res = f'''от {name[0]} {name[1]}
+{place[0]}
+{place[1]}
+{state}
+{index}'''
+    print(res)
+
+
+Растягивание
+
+def stretching(line, spaces):
+    res = [(' ' * spaces).join(word) for word in line.split()]
+    print((' ' * (spaces + 1)).join(res))
+
+
+Заморозки
+
+def freezing(arr):
+    print(len([1 for i in range(len(arr)) for j in range(len(arr[i]))
+               if arr[i][j] < 0]))
+
+
+Многолучевая звезда
+
+from turtle import Turtle, done
+
+t = Turtle()
+t.speed(0)
+col = textinput('Выбор цвета', 'Введите строку - название цвета звезды')
+if col is None:
+    col = 'black'
+t.color(col)
+t.pensize(3)
+side = 200
+delta = 10
+for i in range(120):
+    t.fd(side)
+    t.back(side)
+    t.lt(3)
+    if 0 <= i % 20 <= 9:
+        side += delta
+    else:
+        side -= delta
+done()
